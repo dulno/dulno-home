@@ -1,6 +1,7 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
+RUN mkdir -p /home/dulno/home
 RUN ln -s /obfuscation /home/dulno/home
 
 COPY . /home/dulno/home
