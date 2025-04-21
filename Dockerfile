@@ -1,13 +1,13 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
-RUN ln -s /obfuscation /home
+RUN ln -s /obfuscation /home/dulno/home
 
-COPY . /home
+COPY . /home/dulno/home
 
-WORKDIR /home
+WORKDIR /home/dulno/home
 
-ENV OBFUSCATION_HOME=/home
+ENV OBFUSCATION_HOME=/home/dulno/home
 
 RUN node obfuscation/obfuscate.js
 
@@ -19,9 +19,9 @@ RUN apt-get update && \
 
 RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
 
-COPY --from=builder /home /home
+COPY --from=builder /home/dulno/home /home/dulno/home
 
-WORKDIR /home
+WORKDIR /home/dulno/home
 
 RUN django-admin compilemessages
 
