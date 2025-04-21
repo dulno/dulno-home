@@ -42,7 +42,7 @@ function replaceIncludes(htmlContent) {
   let match;
   while ((match = regex.exec(htmlContent)) !== null) {
     const filePath = match[1];
-    let fileContent = fs.readFileSync(`/home/dulno/home/templates/${filePath}`, 'utf-8')
+    let fileContent = fs.readFileSync(`/dulno/templates/${filePath}`, 'utf-8')
     htmlContent = htmlContent.replace(match[0], fileContent);
   }
   return htmlContent;
