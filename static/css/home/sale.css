@@ -1,0 +1,148 @@
+input[type=text] {
+  background-color: #0d1117 !important;
+  color: white !important;
+  -webkit-text-fill-color: white;
+  border: 1px solid #cecece !important;
+}
+
+input[type=text]::placeholder {
+  color: #828282 !important;
+  -webkit-text-fill-color: #828282;
+}
+
+input[type=text]:-webkit-autofill,
+input[type=text]:-webkit-autofill:hover,
+input[type=text]:-webkit-autofill:focus,
+input[type=text]:-webkit-autofill:active{
+  -webkit-background-clip: text;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+
+.form-label {
+  text-align: left;
+  width: 100%;
+  font-size: 18px;
+}
+
+#sale-container {
+  width: min(calc(1300px - 15vw), 95%);
+  text-align: center;
+  margin: auto auto 25vh;
+}
+
+#sale-headline {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
+}
+
+.sale-section {
+  width: 90%;
+  margin: auto;
+}
+
+.sale-section-parallel {
+  display: flex;
+}
+
+.sale-section-parallel-left, .sale-section-parallel-right {
+  width: 50%;
+  margin-bottom: 1.5rem;
+}
+
+.sale-section-parallel-left {
+  margin-right: 0.5rem;
+}
+
+.sale-section-parallel-right {
+  margin-left:  0.5rem;
+}
+
+@media (max-width: 800px) {
+  .sale-section-parallel {
+    display: block;
+  }
+
+  .sale-section-parallel-left, .sale-section-parallel-right {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+
+.sale-separator {
+  width: 100%;
+  height: 2px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #464646;
+}
+
+#sale-message {
+  height: 300px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#sale-message {
+  color: white !important;
+  border: 1px white solid;
+}
+
+.ql-editor::-webkit-scrollbar {
+  width: 14px;
+}
+
+.ql-editor::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+.ql-editor::-webkit-scrollbar-thumb {
+  background-color: dimgray !important;
+  border-radius: 15px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb {
+  border: 3px solid #0d1117;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: left;
+}
+
+.ql-toolbar {
+  border: 1px white solid !important;
+}
+
+.ql-toolbar .ql-stroke {
+  fill: none !important;
+}
+
+.ql-toolbar .ql-stroke {
+  stroke: #fff !important;
+}
+
+.ql-toolbar .ql-fill {
+  stroke: none !important;
+}
+
+.ql-toolbar .ql-fil {
+  fill: #fff !important;
+}
+
+.ql-toolbar .ql-picker {
+  color: #fff !important;
+}
+
+.ql-picker-label:hover {
+  color: #fff !important;
+}
+
+.ql-picker-options {
+  background-color: #212529 !important;
+}

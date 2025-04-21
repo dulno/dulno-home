@@ -1,0 +1,58 @@
+.loader {
+  font-size: 11px;
+  animation: escaleY 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+  animation-delay: -0.16s;
+  position: relative;
+  margin-left: 50%;
+  margin-top: calc(50vh - 70px + 2em);
+}
+
+.dark .loader {
+  color: #cccccc;
+  background: #cccccc;
+}
+
+.light .loader {
+  color: #666666;
+  background: #666666;
+}
+
+.loader-list {
+  margin-top: 200px;
+}
+
+.loader:before, .loader:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 2em;
+  width: 1em;
+  height: 4em;
+  animation: escaleY 1s infinite ease-in-out;
+}
+
+.dark .loader:before, .dark .loader:after {
+  background: #cccccc;
+}
+
+.light .loader:before, .light .loader:after {
+  background: #666666;
+}
+
+.loader:before {
+  left: -2em;
+  animation-delay: -0.32s;
+}
+
+@keyframes escaleY {
+  0%, 80%, 100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}

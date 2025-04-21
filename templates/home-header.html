@@ -1,0 +1,27 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
+  <a class="navbar-brand d-block d-lg-none ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
+  <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-content">
+    <div class="d-block d-lg-flex justify-content-xxl-between align-items-center mb-3 my-lg-0" id="navbar-content-wrapper">
+      <a class="d-none d-lg-block ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
+      <ul class="navbar-nav d-flex justify-content-center align-items-center ms-xl-5 ms-lg-4 ms-lg-3 ms-xxl-0">
+        <li class="nav-item"><a class="nav-link {% if request.path == '/product/' or request.path == '/' %}active{% endif %}" href="/product/">{% trans 'home.header.product' %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.path == '/solution/' %}active{% endif %}" href="/solution/">{% trans 'home.header.solution' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://documentation.{{domain}}/">{% trans 'home.header.documentation' %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'download' in request.path %}active{% endif %}" href="/download/">{% trans 'home.header.download' %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.path == '/pricing/' %}active{% endif %}" href="/pricing/">{% trans 'home.header.pricing' %}</a></li>
+      </ul>
+      <div class="d-flex justify-content-center justify-content-lg-end align-items-center flex-column-reverse flex-lg-row ms-auto ms-xxl-0 me-xl-5 me-lg-3 mt-4 mt-lg-0">
+        <div class="mt-3 mt-lg-0">
+          {% include 'home-language.html' %}
+        </div>
+        <a href="/login/" class="btn btn-info ms-lg-4" id="login-button" role="button">{% trans 'home.header.login' %}</a>
+      </div>
+    </div>
+  </div>
+</nav>
+<div id="header-space"></div>

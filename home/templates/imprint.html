@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+<html lang="en">
+  {% include 'head.html' %}
+    <body class="dark" data-bs-theme="dark">
+    {% include 'home-header.html' %}
+    <div id="imprint-container">
+      <h1 class="text-center mt-5 mb-5">{% trans 'home.imprint.headline' %}</h1>
+      <h3>{% trans 'home.imprint.information' %}</h3>
+      <p>
+        {% trans 'home.imprint.name' %}<br>
+        {% trans 'home.imprint.address' %}<br>
+        {% trans 'home.imprint.place' %}<br>
+        {% trans 'home.imprint.country' %}
+      </p>
+      <h3 class="mt-5">{% trans 'home.imprint.contact' %}</h3>
+      <p>
+        {% trans 'home.imprint.email' %}: support@{{domain}}
+      </p>
+      <h3 class="mt-5">{% trans 'home.imprint.content' %}</h3>
+      <p>
+        {% trans 'home.imprint.content.information.1' %}
+      </p>
+      <p>
+        {% trans 'home.imprint.content.information.2' %}
+      </p>
+      <h3 class="mt-5">{% trans 'home.imprint.links' %}</h3>
+      <p>
+        {% trans 'home.imprint.links.information.1' %}
+      </p>
+      <p>
+        {% trans 'home.imprint.links.information.2' %}
+      </p>
+      <h3 class="mt-5">{% trans 'home.imprint.copyright' %}</h3>
+      <p>
+        {% trans 'home.imprint.copyright.information.1' %}
+      </p>
+      <p>
+        {% trans 'home.imprint.copyright.information.2' %}
+      </p>
+      <h3 class="mt-5">{% trans 'home.imprint.dispute' %}</h3>
+      <p>
+        {% trans 'home.imprint.dispute.information.1' %}<br>
+        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.
+      </p>
+      <p class="mb-5">
+        {% trans 'home.imprint.dispute.information.2' %}<br>
+        {% trans 'home.imprint.dispute.information.3' %}
+      </p>
+    </div>
+    {% include 'home-footer.html' %}
+  </body>
+</html>

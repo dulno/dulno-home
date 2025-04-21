@@ -1,0 +1,12 @@
+#pricing-container {
+  width: min(calc(1500px), 95%);
+  margin-bottom: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#pricing-headline {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5vh;
+}

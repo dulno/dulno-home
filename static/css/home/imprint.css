@@ -1,0 +1,4 @@
+#imprint-container {
+  width: min(calc(1500px), 95%);
+  margin: auto;
+}

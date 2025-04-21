@@ -1,0 +1,55 @@
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta name="robots" content="index, follow">
+  <meta property="og:url" content="{{base_url}}">
+  <meta property="og:site_name" content="Dulno">
+  <meta name="description" content="We offer a code-free automation environment for everyone. Dive deeper into our offer now to optimize your everyday life today.">
+  <link rel="stylesheet" href="{% static 'css/google/google-font.css' %}" />
+  <link rel=icon class="dulno-icon" href="{% static 'img/icon-dark.ico' %}" type="image/x-icon" sizes="144x144">
+  <link rel="stylesheet" href="{% static 'css/base/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base/loader.css' %}">
+  {% for entry in css %}
+    <link rel="stylesheet" href="{% static '' %}{{entry}}">
+  {% endfor %}
+  <link rel="stylesheet" href="{% static 'css/google/google-icon.css' %}" />
+  <link rel="stylesheet" href="{% static 'dependency/bootstrap@5.3.3/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'dependency/font-awesome@6.7.2/css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'dependency/quill@2.0.2/quill.snow.css' %}">
+  <script src="{% static 'js/base/icon.js' %}"></script>
+  <script src="{% static 'js/base/cookie.js' %}"></script>
+  <script src="{% static 'js/base/cookie-banner.js' %}"></script>
+  <script src="{% static 'js/base/language.js' %}"></script>
+  <script>
+    {% include 'js/httprequest.js' %}
+  </script>
+  <script src="{% static 'dependency/bootstrap@5.3.3/js/bootstrap.bundle.js' %}"></script>
+  <script src="{% static 'dependency/jquery@3.7.1/jquery.js' %}"></script>
+  <script src="{% static 'dependency/popperjs@2.11.8/popper.min.js' %}"></script>
+  <script src="{% static 'dependency/lodash@4.17.21/lodash.min.js' %}"></script>
+  <script src="{% static 'dependency/quill@2.0.2/quill.js' %}"></script>
+  <script src="{% static 'dependency/sweetalert2@11/sweetalert.js' %}"></script>
+  {% if title %}
+    <title>{{title}}</title>
+  {% else %}
+    <title>Dulno</title>
+  {% endif %}
+  <script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@type" : "WebSite",
+      "name" : "Dulno",
+      "url" : "{{base_url}}",
+      "logo": "{{base_url}}/static/img/icon-dark.ico",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{base_url}}/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  </script>
+</head>

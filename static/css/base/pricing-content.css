@@ -1,0 +1,417 @@
+:root {
+  --pricing-package-highlight-color: #33b1ff;
+  --pricing-package-highlight-shadow: rgba(51, 177, 255, 0.8);
+}
+
+#pricing-personalization {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+.pricing-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  padding: 5px;
+  background-color: #131820;
+  border: 1px #2b3441 solid;
+  color: white;
+}
+
+.pricing-switch-entry {
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: white;
+}
+
+.pricing-switch-active {
+  background-color: #4b5868;
+}
+
+@media (max-width: 1000px) {
+  #pricing-personalization {
+    display: block;
+  }
+
+  #pricing-runtime-selection {
+    margin: auto auto 30px;
+    width: fit-content;
+  }
+
+  #pricing-class-selection {
+    margin: auto;
+    width: fit-content;
+  }
+}
+
+@media (max-width: 575px) {
+  #pricing-class-selection {
+    flex-direction: column;
+    border-radius: 20px;
+  }
+
+  #pricing-class-selection .pricing-switch-entry {
+    margin-bottom: 10px;
+  }
+
+  #pricing-class-selection .pricing-switch-entry:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pricing-table-head {
+  width: 100%;
+  table-layout: fixed;
+  color: white;
+  border-collapse: separate;
+  border-spacing: 15px 0;
+}
+
+@media (max-width: 1350px) {
+  .pricing-table-head {
+    border-spacing: 0 0;
+  }
+}
+
+.pricing-table-head thead tr {
+  background-color: transparent !important;
+}
+
+.pricing-table {
+  width: 100%;
+  margin: auto;
+  table-layout: fixed;
+  color: white;
+  border-collapse: separate;
+  border-spacing: 15px 0;
+}
+
+.pricing-table-advantages {
+  width: 20% !important;
+  position: relative;
+  text-align: center;
+}
+
+.pricing-table-advantages-logo {
+  width: calc(70%);
+  height: calc(70%);
+}
+
+.pricing-table-divider {
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid #2b333f;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+
+.pricing-table tr {
+  width: 20%;
+  text-align: center;
+}
+
+.pricing-table tr td {
+  padding: 12px;
+}
+
+.pricing-table tr td:nth-child(1) {
+  border-bottom: 1px solid #2b333f;
+}
+
+.pricing-table tr td:nth-child(2) {
+  border-bottom: 1px solid #101217;
+}
+
+.pricing-table tr td:nth-child(3) {
+  border-bottom: 1px solid #1e242c;
+}
+
+.pricing-table tr td:nth-child(4) {
+  border-bottom: 1px solid #242a34;
+}
+
+.pricing-table tr td:nth-child(5) {
+  border-bottom: 1px solid #2b333f;
+}
+
+.pricing-table tr:last-child td {
+  border-bottom: none;
+}
+
+#pricing-table-container-desktop .pricing-table tbody tr:first-child td:nth-child(3) {
+  border-top: 2px solid var(--pricing-package-highlight-color);
+}
+
+#pricing-table-container-desktop .pricing-table tbody tr:last-child td:nth-child(3) {
+  border-bottom: 2px solid var(--pricing-package-highlight-color);
+}
+
+#pricing-table-container-desktop .pricing-table td:nth-child(3) {
+  border-left: 2px solid var(--pricing-package-highlight-color);
+  border-right: 2px solid var(--pricing-package-highlight-color);
+}
+
+.pricing-table tbody tr:first-child td {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.pricing-table tbody tr:last-child td {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.pricing-package {
+  width: 20%;
+  position: sticky !important;
+  top: 87px;
+  z-index: 99 !important;
+  vertical-align: top;
+  color: white;
+  text-align: center;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+
+.pricing-package-title {
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pricing-package-description {
+  width: fit-content;
+  max-width: 100%;
+  padding: 6px;
+  border-radius: 4px;
+  background-color: white;
+  color: black !important;
+  margin: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.pricing-package-price-container {
+  height: 80px;
+}
+
+.pricing-package-price {
+  margin-top: 10%;
+  font-weight: bold;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.pricing-get-button {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.pricing-package-features-headline {
+  text-align: left;
+}
+
+.pricing-package-features {
+  list-style: none;
+  padding: 0;
+  font-weight: normal;
+}
+
+.pricing-package-features li {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  text-align: left;
+}
+
+@media (max-width: 1600px) {
+  .pricing-package {
+    padding: 10px 20px;
+  }
+}
+
+.pricing-package-free, .pricing-feature-free, #pricing-table-container-desktop .pricing-table tbody td:nth-child(2) {
+  background-color: #162a33;
+}
+
+.pricing-package-individual, .pricing-feature-individual, #pricing-table-container-desktop .pricing-table tbody td:nth-child(3) {
+  background-color: #324450;
+}
+
+#pricing-table-container-desktop .pricing-package-individual {
+  border: 1px solid var(--pricing-package-highlight-color);
+  outline: 2px solid var(--pricing-package-highlight-color);
+  box-shadow: 0 0 80px var(--pricing-package-highlight-color);
+  z-index: 0 !important;
+  padding: 9px 29px;
+}
+
+.pricing-package-team, .pricing-feature-team, #pricing-table-container-desktop .pricing-table tbody td:nth-child(4) {
+  background-color: #425460;
+}
+
+.pricing-package-enterprise, .pricing-feature-enterprise, #pricing-table-container-desktop .pricing-table tbody td:nth-child(5) {
+  background-color: #62747e;
+}
+
+.pricing-package-enterprise-price {
+  margin-bottom: 60px;
+}
+
+.pricing-feature-bundle-headline {
+  background-color: #0d1117 !important;
+}
+
+.pricing-feature-bundle-headline td {
+  font-weight: bold;
+  font-size: 22px;
+  border: none !important;
+  background-color: transparent !important;
+  padding-top: 50px !important;
+}
+
+.pricing-feature {
+  text-align: left !important;
+  width: 20% !important;
+}
+
+.pricing-feature-tip {
+  margin-bottom: 0;
+  float: right;
+  text-align: right;
+}
+
+#pricing-table-container-mobile {
+  display: none;
+}
+
+@media (max-width: 1350px) {
+  #pricing-table-container-desktop {
+    display: none;
+  }
+
+  #pricing-table-container-mobile {
+    display: block;
+  }
+
+  .pricing-table-advantages {
+    width: 0 !important;
+  }
+
+  .pricing-table-mobile-head {
+    width: min(300px, 100%);
+    margin: auto;
+  }
+
+  .pricing-table-mobile-head .pricing-package {
+    width: 100%;
+  }
+
+  .pricing-table-mobile-body {
+    width: min(650px, 100%);
+    margin: auto;
+  }
+
+  .pricing-table-mobile-body td {
+    width: 50% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pricing-table-mobile-body h5 {
+    display: none;
+  }
+
+  .pricing-table thead:after {
+    content: "-";
+    display: block;
+    line-height: 5vh;
+    color: transparent;
+  }
+
+  .pricing-package {
+    position: relative !important;
+    top: 0 !important;
+    z-index: 0 !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .pricing-table-mobile-head {
+    width: 71.5%;
+  }
+}
+
+#pricing-faq-accordion {
+  width: min(calc(1000px), 100%);
+  margin: auto;
+}
+
+.accordion-item {
+  border: none !important;
+}
+
+.dark .accordion-item {
+  background-color: #0d1117 !important;
+}
+
+.light .accordion-item {
+  background-color: #fafafa !important;
+}
+
+.accordion-button {
+  font-size: 25px !important;
+  font-weight: bold;
+}
+
+.dark .accordion-button {
+  color: white !important;
+  background-color: #0d1117 !important;
+  border-bottom: 2px #4a4a4a solid !important;
+}
+
+.light .accordion-button {
+  color: black !important;
+  background-color: #fafafa !important;
+  border-bottom: 2px #878787 solid !important;
+}
+
+.accordion-button:after {
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'><path fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/></svg>") !important;
+}
+
+.dark .accordion-collapse {
+  color: white !important;
+  background-color: #0d1117 !important;
+}
+
+.light .accordion-collapse {
+  color: black !important;
+  background-color: #fafafa !important;
+}
+
+:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}

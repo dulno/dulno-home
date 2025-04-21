@@ -1,0 +1,285 @@
+{% load static %}
+{% load i18n %}
+<html lang="en">
+{% include 'head.html' %}
+  <body class="dark" data-bs-theme="dark">
+    {% include 'home-header.html' %}
+    <div id="solution-header">
+      <div id="solution-header-content">
+        <div id="solution-logo-container">
+          <img id="solution-logo" src="{% static 'img/home/solution.webp' %}">
+          <div id="solution-logo-shine"></div>
+        </div>
+        <div id="solution-header-content-text">
+          <h3 id="solution-headline">{% trans 'home.solution.headline' %}</h3>
+          <h1 id="solution-slogan"><b>{% trans 'home.solution.slogan' %}</b></h1>
+          <h5 class="text-center mt-4 mb-1">{% trans 'home.solution.description.1' %} <br class="solution-linebreak">{% trans 'home.solution.description.2' %}</h5>
+        </div>
+      </div>
+      <svg class="home-wave" x="0px" y="0px" viewBox="0 0 1440 110">
+        <path d="M685.6,38.8C418.7-11.1,170.2,9.9,0,30v96h1440V30C1252.7,52.2,1010,99.4,685.6,38.8z"/>
+      </svg>
+      <div id="solution-header-wave-background"></div>
+    </div>
+    <div class="solution-content solution-animation-opacity">
+      <div id="solution-jobs-content">
+        <h3 class="solution-content-text-headline">{% trans 'home.solution.jobs.headline' %}</h3>
+        <h1 class="solution-content-text-slogan">{% trans 'home.solution.jobs.slogan' %}</h1>
+        <p class="text-center mt-3 mb-0">{% trans 'home.solution.jobs.description.1' %} <br class="solution-linebreak">{% trans 'home.solution.jobs.description.2' %} <br class="solution-linebreak">{% trans 'home.solution.jobs.description.3' %}</p>
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sales-tab-pane" type="button" role="tab" aria-controls="sales-tab-pane" aria-selected="true">{% trans 'home.solution.jobs.sales' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="marketing-tab" data-bs-toggle="tab" data-bs-target="#marketing-tab-pane" type="button" role="tab" aria-controls="marketing-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.marketing' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="finances-tab" data-bs-toggle="tab" data-bs-target="#finances-tab-pane" type="button" role="tab" aria-controls="finances-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.finances' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="developer-tab" data-bs-toggle="tab" data-bs-target="#developer-tab-pane" type="button" role="tab" aria-controls="developer-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.developer' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="creatives-tab" data-bs-toggle="tab" data-bs-target="#creatives-tab-pane" type="button" role="tab" aria-controls="creatives-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.creatives' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="support-tab" data-bs-toggle="tab" data-bs-target="#support-tab-pane" type="button" role="tab" aria-controls="support-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.support' %}</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="human-resources-tab" data-bs-toggle="tab" data-bs-target="#human-resources-tab-pane" type="button" role="tab" aria-controls="human-resources-tab-pane" aria-selected="false">{% trans 'home.solution.jobs.hr' %}</button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="sales-tab-pane" role="tabpanel" aria-labelledby="sales-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.sales.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.sales.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.sales.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.sales.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.sales.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.sales.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel" aria-labelledby="marketing-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.marketing.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.marketing.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.marketing.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.marketing.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.marketing.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.marketing.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="finances-tab-pane" role="tabpanel" aria-labelledby="finances-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.finances.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.finances.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.finances.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.finances.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.finances.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.finances.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="developer-tab-pane" role="tabpanel" aria-labelledby="developer-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.developer.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.developer.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.developer.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.developer.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.developer.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.developer.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="creatives-tab-pane" role="tabpanel" aria-labelledby="creatives-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.creatives.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.creatives.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.creatives.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.creatives.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.creatives.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.creatives.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="support-tab-pane" role="tabpanel" aria-labelledby="support-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.support.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.support.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.support.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.support.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.support.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.support.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="human-resources-tab-pane" role="tabpanel" aria-labelledby="human-resources-tab" tabindex="0">
+            <div class="solution-job">
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.hr.use.case.1.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.hr.use.case.1.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.hr.use.case.2.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.hr.use.case.2.description' %}</label>
+              </div>
+              <div class="solution-jobs-use-case">
+                <h4>{% trans 'home.solution.jobs.hr.use.case.3.title' %}</h4>
+                <label>{% trans 'home.solution.jobs.hr.use.case.3.description' %}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="solution-divider">
+      <svg class="home-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L80,245.3C160,203,320,117,480,101.3C640,85,800,139,960,138.7C1120,139,1280,85,1360,58.7L1440,32L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path></svg>
+      <div class="solution-divider-background"></div>
+      <svg class="home-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,160L80,144C160,128,320,96,480,90.7C640,85,800,107,960,117.3C1120,128,1280,128,1360,128L1440,128L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"></path></svg>
+    </div>
+    <div class="solution-content">
+      <div id="solution-apps-content">
+        <div id="solution-apps-content-text" class="solution-animation-down">
+          <h3 class="solution-content-text-headline">{% trans 'home.solution.apps.headline' %}</h3>
+          <h1 class="solution-content-text-slogan">{% trans 'home.solution.apps.slogan' %}</h1>
+          <p class="text-center mt-3">{% trans 'home.solution.apps.description.1' %} <br class="solution-linebreak">{% trans 'home.solution.apps.description.2' %}</p>
+          <div id="solution-apps-constellations">
+            <div class="solution-apps-constellations-slider">
+              <div id="solution-apps-constellations-triggers">
+              </div>
+            </div>
+            <i id="solution-apps-constellations-plus" class="fa-solid fa-plus"></i>
+            <div class="solution-apps-constellations-slider">
+              <div id="solution-apps-constellations-actions">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="solution-divider">
+      <svg class="home-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L120,250.7C240,213,480,139,720,128C960,117,1200,171,1320,197.3L1440,224L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+      <div class="solution-divider-background"></div>
+      <svg class="home-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill-opacity="1" d="M0,288L120,282.7C240,277,480,267,720,229.3C960,192,1200,128,1320,96L1440,64L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"></path></svg>
+    </div>
+    <div class="solution-content">
+      <div id="solution-get-content">
+        <div id="solution-get-content-text" class="solution-animation-opacity">
+          <h3 class="text-center">{% trans 'home.solution.get.headline' %}</h3>
+          <h1 class="solution-content-text-slogan">{% trans 'home.solution.get.slogan' %}</h1>
+          <p>{% trans 'home.solution.get.description' %}</p>
+          <button class="btn btn-block btn-primary mt-5" onclick="window.location.href = '/pricing/'">{% trans 'home.solution.get.button' %}</button>
+        </div>
+      </div>
+    </div>
+    {% include 'home-footer.html' %}
+  </body>
+</html>
+
+<script>
+  let triggers = [
+    {logo: "manual.webp"},
+    {logo: "scheduler.webp"},
+    {logo: "process.webp"},
+    {logo: "device.webp"},
+    {logo: "webhook.webp"},
+    {logo: "database.webp"},
+    {logo: "mail.webp"},
+    {logo: "googlecalendar.webp"},
+    {logo: "discord.webp"},
+    {logo: "gitlab.webp"},
+  ];
+  let actions = [
+    {logo: "device.webp"},
+    {logo: "database.webp"},
+    {logo: "mail.webp"},
+    {logo: "googlecalendar.webp"},
+    {logo: "googledocs.webp"},
+    {logo: "discord.webp"},
+    {logo: "chatgpt.webp"},
+    {logo: "gitlab.webp"},
+  ];
+
+  $(document).ready(function() {
+    checkAnimations();
+    $(window).scroll(function(){
+      checkAnimations();
+    });
+    displayAppConstellations();
+  });
+
+  function displayAppConstellations() {
+    for (let i = 0; i < triggers.length * 3; i++) {
+      document.getElementById("solution-apps-constellations-triggers")
+        .appendChild(createAppConstellationElement(triggers[i % triggers.length].logo));
+    }
+    for (let i = 0; i < actions.length * 3; i++) {
+      document.getElementById("solution-apps-constellations-actions")
+        .appendChild(createAppConstellationElement(actions[i % actions.length].logo));
+    }
+  }
+
+  function createAppConstellationElement(logo) {
+    let element = document.createElement("img");
+    element.classList.add("solution-apps-constellations-app");
+    element.src = "{% static '' %}" + "img/applications/" + logo.split(".")[0] + ".webp";
+    return element;
+  }
+
+  function checkAnimations() {
+    checkAnimation("solution-animation-opacity", "solution-animation-opacity-show");
+    checkAnimation("solution-animation-left", "solution-animation-left-show");
+    checkAnimation("solution-animation-right", "solution-animation-right-show");
+    checkAnimation("solution-animation-down", "solution-animation-down-show");
+  }
+
+  function checkAnimation(elementClass, animationClass) {
+    let elements = document.getElementsByClassName(elementClass);
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      let bottom_of_object = element.getBoundingClientRect().top - window.screen.height;
+      if (bottom_of_object < -window.screen.height / 6) {
+        element.classList.remove(elementClass);
+        if (window.screen.width > 1000) {
+          element.classList.add(animationClass);
+          setTimeout(function () {
+            element.classList.remove(animationClass);
+          }, 1500);
+        }
+      }
+    }
+  }
+</script>

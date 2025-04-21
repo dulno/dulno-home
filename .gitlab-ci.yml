@@ -1,0 +1,193 @@
+stages:
+  - build
+  - scan
+  - publish
+  - deploy
+  - merge
+
+variables:
+  DOCKER_IMAGE: "dulno-home"
+  DOCKER_PROXY_IMAGE: "dulno-home-proxy"
+  KUBERNETES_RESOURCE: "deployment/dulno-home-deployment"
+  KUBERNETES_PROXY_RESOURCE: "deployment/dulno-home-proxy-deployment"
+
+build_staging:
+  stage: build
+  image: docker:cli
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+  script:
+    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
+    - docker build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" -t $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test .
+    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" -t $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
+    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+  only:
+    - dev
+
+build_productive:
+  stage: build
+  image: docker:cli
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+  script:
+    - echo $PRODUCTIVE_DOCKER_PASSWORD | docker login -u $PRODUCTIVE_DOCKER_USERNAME --password-stdin $PRODUCTIVE_DOCKER_REGISTRY
+    - docker build --build-arg DOCKER_REGISTRY="$PRODUCTIVE_DOCKER_REGISTRY" -t $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:test .
+    - docker push $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - docker buildx build --build-arg DOCKER_REGISTRY="$PRODUCTIVE_DOCKER_REGISTRY" --build-arg SERVER_NAME="dulno.com www.dulno.com" -t $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
+    - docker push $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+  only:
+    - main
+
+scan_staging:
+  stage: scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  dependencies:
+    - build_staging
+  variables:
+    GIT_STRATEGY: none
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+    TRIVY_USERNAME: $STAGING_DOCKER_USERNAME
+    TRIVY_PASSWORD: $STAGING_DOCKER_PASSWORD
+  script:
+    - trivy --version
+    - time trivy clean --scan-cache
+    - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+  cache:
+    paths:
+      - .trivycache/
+  only:
+    - dev
+
+scan_productive:
+  stage: scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  dependencies:
+    - build_productive
+  variables:
+    GIT_STRATEGY: none
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+    TRIVY_USERNAME: $PRODUCTIVE_DOCKER_USERNAME
+    TRIVY_PASSWORD: $PRODUCTIVE_DOCKER_PASSWORD
+  script:
+    - trivy --version
+    - time trivy clean --scan-cache
+    - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+  cache:
+    paths:
+      - .trivycache/
+  only:
+    - main
+
+publish_staging:
+  stage: publish
+  image: docker:cli
+  services:
+    - docker:dind
+  dependencies:
+    - scan_staging
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+  script:
+    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
+    - docker pull $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - docker tag $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+    - docker pull $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - docker tag $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+  only:
+    - dev
+
+publish_productive:
+  stage: publish
+  image: docker:cli
+  services:
+    - docker:dind
+  dependencies:
+    - scan_productive
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+  script:
+    - echo $PRODUCTIVE_DOCKER_PASSWORD | docker login -u $PRODUCTIVE_DOCKER_USERNAME --password-stdin $PRODUCTIVE_DOCKER_REGISTRY
+    - docker pull $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:test
+    - docker tag $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:test $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+    - docker push $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+    - docker pull $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - docker tag $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+    - docker push $PRODUCTIVE_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+  only:
+    - main
+
+deploy_staging:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  dependencies:
+    - publish_staging
+  before_script:
+    - mkdir -p ~/.kube
+    - echo "$STAGING_KUBERNETES_CONFIGURATION" > ~/.kube/config
+  script:
+    - kubectl rollout restart $KUBERNETES_RESOURCE
+    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
+    - kubectl rollout status $KUBERNETES_RESOURCE
+    - kubectl rollout status $KUBERNETES_PROXY_RESOURCE
+  only:
+    - dev
+
+deploy_productive:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  dependencies:
+    - publish_productive
+  before_script:
+    - mkdir -p ~/.kube
+    - echo "$PRODUCTIVE_KUBERNETES_CONFIGURATION" > ~/.kube/config
+  script:
+    - kubectl rollout restart $KUBERNETES_RESOURCE
+    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
+    - kubectl rollout status $KUBERNETES_RESOURCE
+    - kubectl rollout status $KUBERNETES_PROXY_RESOURCE
+  only:
+    - main
+
+merge:
+  stage: merge
+  image: curlimages/curl:latest
+  script:
+    - |
+      curl --request POST --header "PRIVATE-TOKEN: $DULNO_GITLAB_PRIVATE_TOKEN" \
+      --data "source_branch=dev&target_branch=main&title=Production deployment" \
+      --data "remove_source_branch=false&squash=true" \
+      "$CI_SERVER_URL/api/v4/projects/$CI_PROJECT_ID/merge_requests"
+  only:
+    - dev
+  when: on_success

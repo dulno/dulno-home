@@ -1,0 +1,15 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+
+#IntelliJ IDEA
+.idea
+
+# Virtual python environment
+/env/
+
+# Compiled locales
+*.mo

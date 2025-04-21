@@ -1,0 +1,32 @@
+{% load static %}
+<div id="home-languages" class="dropdown" data-bs-theme="dark">
+  <button class="btn home-language-button dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <img id="home-language-current" class="home-language-flag">
+  </button>
+  <ul class="dropdown-menu">
+    <li><button id="home-language-en" class="btn home-language-button"><img class="home-language-flag" src="{% static 'img/languages/en.webp' %}"></button></li>
+    <li><button id="home-language-de" class="btn home-language-button"><img class="home-language-flag" src="{% static 'img/languages/de.webp' %}"></button></li>
+  </ul>
+</div>
+
+<script>
+  $(document).ready(function() {
+    let language = Cookie.find("dulno-home-language");
+    if (language == null) {
+      language = "en";
+    }
+    document.getElementById("home-language-" + language).classList.add("d-none");
+    document.getElementById("home-language-current").src =
+      "/static/img/languages/" + language + ".webp";
+  });
+
+  document.getElementById("home-language-en").onclick = function (event) {
+    Cookie.create("dulno-home-language", "en", 60 * 60 * 24 * 365);
+    window.location.reload();
+  }
+
+  document.getElementById("home-language-de").onclick = function (event) {
+    Cookie.create("dulno-home-language", "de", 60 * 60 * 24 * 365);
+    window.location.reload();
+  }
+</script>

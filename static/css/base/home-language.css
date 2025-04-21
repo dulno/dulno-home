@@ -1,0 +1,36 @@
+#home-languages {
+  position: relative;
+  z-index: 10;
+}
+
+.home-language-button {
+  background-color: #2a333b !important;
+  border: none !important;
+}
+
+.home-language-button:hover, .home-language-button:focus {
+  background-color: #38444f !important;
+}
+
+.home-language-flag {
+  width: 50px;
+  height: 28px;
+  border-radius: 5px;
+}
+
+#home-languages .dropdown-menu {
+  min-width: auto !important;
+  width: auto !important;
+  padding: 0;
+}
+
+#home-languages .dropdown-menu li {
+  width: max-content;
+  height: max-content;
+  padding: 0;
+}
+
+#home-languages .dropdown-item {
+  width: max-content;
+  height: max-content;
+}

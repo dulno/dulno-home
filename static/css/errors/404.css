@@ -1,0 +1,40 @@
+body {
+  overflow: hidden;
+}
+
+#error-headline-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  margin-top: 20vh;
+  width: 100%;
+  text-align: center;
+}
+
+#error-headline {
+  margin-top: 2%;
+  font-weight: bold;
+}
+
+#error-description {
+  margin-top: 2%;
+}
+
+#error-logo {
+  transition: transform .3s;
+  width: 15%;
+  height: auto;
+}
+
+#error-logo:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 575px) {
+  #error-logo {
+    width: 30%;
+  }
+}
