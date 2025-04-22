@@ -8,11 +8,11 @@
       <div id="home-header-content-wrapper">
         <div id="home-header-content">
           <div id="home-header-content-text" class="ms-xl-5 ms-3">
-            <h4 class="me-auto ms-0 home-content-text-headline">{% trans 'home.headline' %}</h4>
+            <h4 class="me-auto ms-lg-0 ms-auto home-content-text-headline">{% trans 'home.headline' %}</h4>
             <h1 id="home-slogan"><b>{% trans 'home.slogan' %}</b></h1>
             <h5 class="mt-4">{% trans 'home.description.1' %} <br class="home-linebreak">{% trans 'home.description.2' %}</h5>
-            <div>
-              <a class="btn btn-dark px-5 py-2 mt-5" href="https://portal.{{domain}}/signup/" role="button">{% trans 'home.try' %} <i class="fa-solid fa-arrow-right ms-2"></i></a>
+            <div class="d-flex justify-content-lg-start justify-content-center">
+              <a class="btn btn-dark px-lg-5 px-2 py-2 mt-5" href="https://portal.{{domain}}/signup/" role="button">{% trans 'home.try' %} <i class="fa-solid fa-arrow-right ms-2"></i></a>
             </div>
           </div>
           <div id="home-logo-container" class="me-xl-4 me-3">
@@ -24,9 +24,27 @@
     </div>
     <div class="home-content-odd">
       <div class="home-content my-5 py-5">
+        <div class="py-5">
+          <div>
+            <div class="home-animation-left">
+              <h3 class="home-content-text-headline">{% trans 'home.advanced.headline' %}</h3>
+              <h1 class="home-content-text-slogan">{% trans 'home.advanced.slogan' %}</h1>
+              <p class="text-center">{% trans 'home.advanced.description' %}</p>
+            </div>
+            <div class="d-flex justify-content-center rounded mt-5 home-animation-fly">
+              <img src="{% static 'img/home/scan.gif' %}" height="600">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home-content my-5 py-5">
+    </div>
+    <div class="home-content-odd">
+      <div class="home-content my-5 py-5">
         <div id="home-advanced-content" class="py-5">
           <div id="home-advanced-content-text">
-            <div class="home-animation-left">
+            <div class="home-animation-right">
               <h3 class="home-content-text-headline">{% trans 'home.advanced.headline' %}</h3>
               <h1 class="home-content-text-slogan">{% trans 'home.advanced.slogan' %}</h1>
               <p class="text-center">{% trans 'home.advanced.description' %}</p>
@@ -114,6 +132,7 @@
     checkAnimation("home-animation-left", "home-animation-left-show");
     checkAnimation("home-animation-right", "home-animation-right-show");
     checkAnimation("home-animation-down", "home-animation-down-show");
+    checkAnimation("home-animation-fly", "home-animation-fly-show");
   }
 
   function checkAnimation(elementClass, animationClass) {

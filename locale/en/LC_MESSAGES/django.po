@@ -7,8 +7,6 @@ msgstr ""
 msgid "popup.cancel"
 msgstr "Cancel"
 
-# HOME
-
 # HEADER
 msgid "header.login"
 msgstr "Login"
@@ -45,7 +43,7 @@ msgstr "Dulno"
 msgid "home.headline"
 msgstr "Home"
 msgid "home.slogan"
-msgstr "Plan, Execute, Save"
+msgstr "Your digital stamp card"
 msgid "home.description.1"
 msgstr "We offer a code-free automation environment for everyone."
 msgid "home.description.2"
