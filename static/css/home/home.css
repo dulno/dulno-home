@@ -214,18 +214,6 @@ p {
   pointer-events: none;
 }
 
-#home-header svg {
-  fill: #0d1117;
-}
-
-#home-header-wave-background {
-  background-color: #0d1117;
-  width: 100%;
-  height: 10px;
-  margin-top: -5px;
-  position: absolute;
-}
-
 .home-content {
   width: min(calc(1750px), 95%);
   margin-left: auto;
@@ -365,6 +353,88 @@ p {
     filter: blur(0);
     scale: 1;
   }
+}
+
+#home-functionality-scan-container {
+  position: relative;
+  margin-top: 60px;
+}
+
+#home-functionality-scan-container .home-animation-opacity {
+  opacity: 0 !important;
+}
+
+#home-functionality-scan-container .home-animation-opacity-show {
+  animation: home-functionality-scan-animation-opacity 1.5s ease-in-out;
+}
+
+@keyframes home-functionality-scan-animation-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.4;
+  }
+}
+
+#home-functionality-scan-phone {
+  margin-top: 150px;
+  width: auto;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+#home-functionality-scan-stamp {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  opacity: 0.4;
+  animation: stamp-drop 10s infinite;
+  animation-delay: 1s;
+}
+
+@keyframes stamp-drop {
+  0%   { top: -60px; opacity: 0.4; }
+  30%  { top: 0; opacity: 1; }
+  40%  { top: 0; opacity: 1; }
+  50%  { top: -60px; opacity: 0.4; }
+  100% { top: -60px; opacity: 0.4; }
+}
+
+.home-functionality-steps {
+  list-style-type: none;
+  padding: 0;
+  height: fit-content;
+  width: min(450px, 100%);
+  margin-bottom: 0;
+}
+
+.home-functionality-step:last-child {
+  margin-bottom: 0 !important;
+}
+
+.home-functionality-step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.home-functionality-step-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  min-width: 80px;
+  height: 80px;
+  min-height: 80px;
+  font-size: 40px;
+  background-color: rgba(13, 110, 253, 0.1);
+  color: rgba(13, 110, 253, 0.8);
+  border-radius: 50%;
+  margin-right: 30px;
 }
 
 #home-advanced-content-text {

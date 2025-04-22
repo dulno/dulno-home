@@ -25,14 +25,50 @@
     <div class="home-content-odd">
       <div class="home-content my-5 py-5">
         <div class="py-5">
-          <div>
-            <div class="home-animation-left">
-              <h3 class="home-content-text-headline">{% trans 'home.advanced.headline' %}</h3>
-              <h1 class="home-content-text-slogan">{% trans 'home.advanced.slogan' %}</h1>
-              <p class="text-center">{% trans 'home.advanced.description' %}</p>
+          <div id="home-functionality-content">
+            <div class="home-animation-opacity">
+              <h3 class="home-content-text-headline">{% trans 'home.functionality.headline' %}</h3>
+              <h1 class="home-content-text-slogan">{% trans 'home.functionality.slogan' %}</h1>
+              <p class="text-center">{% trans 'home.functionality.description' %}</p>
             </div>
-            <div class="d-flex justify-content-center rounded mt-5 home-animation-fly">
-              <img src="{% static 'img/home/scan.gif' %}" height="600">
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="d-flex justify-content-end pe-5">
+                <div id="home-functionality-scan-container">
+                  <img id="home-functionality-scan-stamp" class="home-animation-opacity home-animation-delay-3" src="{% static 'img/home/stamp.webp' %}">
+                  <img id="home-functionality-scan-phone" class="home-animation-fly" src="{% static 'img/home/scan.gif' %}">
+                </div>
+              </div>
+              <div style="width: 150px;">
+              </div>
+              <ul class="home-functionality-steps ms-5">
+                <li class="home-functionality-step home-animation-down home-animation-delay-1">
+                  <div class="home-functionality-step-icon">
+                    <i class="fa-solid fa-download"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold">{% trans 'home.functionality.step.1.headline' %}</h5>
+                    <span class="home-functionality-step-description">{% trans 'home.functionality.step.1.description' %}</span>
+                  </div>
+                </li>
+                <li class="home-functionality-step home-animation-down home-animation-delay-2">
+                  <div class="home-functionality-step-icon">
+                    <i class="fa-solid fa-stamp"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold">{% trans 'home.functionality.step.2.headline' %}</h5>
+                    <span>{% trans 'home.functionality.step.2.description' %}</span>
+                  </div>
+                </li>
+                <li class="home-functionality-step home-animation-down home-animation-delay-3">
+                  <div class="home-functionality-step-icon">
+                    <i class="fa-regular fa-face-laugh-beam"></i>
+                  </div>
+                  <div>
+                    <h5 class="fw-bold">{% trans 'home.functionality.step.3.headline' %}</h5>
+                    <span>{% trans 'home.functionality.step.3.description' %}</span>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -44,7 +80,7 @@
       <div class="home-content my-5 py-5">
         <div id="home-advanced-content" class="py-5">
           <div id="home-advanced-content-text">
-            <div class="home-animation-right">
+            <div class="home-animation-left">
               <h3 class="home-content-text-headline">{% trans 'home.advanced.headline' %}</h3>
               <h1 class="home-content-text-slogan">{% trans 'home.advanced.slogan' %}</h1>
               <p class="text-center">{% trans 'home.advanced.description' %}</p>
