@@ -2,38 +2,20 @@
 {% load i18n %}
 <html lang="en">
   {% include 'head.html' %}
-  <body class="dark" data-bs-theme="dark">
+  <body class="light" data-bs-theme="light">
     {% include 'home-header.html' %}
-    <div id="download-mobile-container">
-      <h3 id="download-mobile-headline">{% trans 'home.download.mobile.headline' %}</h3>
-      <h1 id="download-mobile-description">{% trans 'home.download.mobile.description' %}</h1>
-      <div id="download-mobile-list">
-        <div class="download-mobile-store">
-          <button onclick="location.href='https://play.google.com/store/apps/details?id=com.dulno.app&pcampaignid=web_share'" class="download-mobile-button"><img src="{% static 'img/home/google-play-store.webp' %}"></img></button>
+    <div id="download-container">
+      <h3 id="download-headline">{% trans 'download.headline' %}</h3>
+      <h1 id="download-description">{% trans 'download.description' %}</h1>
+      <div id="download-list">
+        <div class="download-store">
+          <button onclick="location.href='https://play.google.com/store/apps/details?id=com.dulno.app&pcampaignid=web_share'" class="download-button"><img src="{% static 'img/home/google-play-store.webp' %}"></img></button>
         </div>
-        <div id="download-mobile-apple-store" class="download-mobile-store">
-          <button id="download-mobile-apple-button" onclick="location.href=''" class="download-mobile-button" style="cursor: not-allowed;" disabled><img src="{% static 'img/home/apple-store.webp' %}" class="opacity-50"></img></button>
+        <div class="download-store">
+          <button id="download-apple-button" onclick="location.href=''" class="download-button"><img src="{% static 'img/home/apple-store.webp' %}"></img></button>
         </div>
       </div>
     </div>
     {% include 'home-footer.html' %}
   </body>
 </html>
-
-<script>
-  $(document).ready(function() {
-    applyTooltips(document.getElementById("download-mobile-apple-button"),
-      document.getElementById("download-mobile-apple-store"),
-      "{% trans 'home.download.mobile.unavailable' %}");
-  });
-
-  function applyTooltips(element, container, text) {
-    $(element).attr("data-bs-toggle", "tooltip");
-    $(element).attr("data-bs-placement", "top");
-    $(element).attr("data-bs-title", text);
-    container.classList.add("position-relative");
-    new bootstrap.Tooltip(element, {
-      container: container
-    });
-  }
-</script>

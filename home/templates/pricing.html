@@ -2,11 +2,11 @@
 {% load i18n %}
 <html lang="en">
   {% include 'head.html' %}
-  <body class="dark">
+  <body class="light">
     {% include 'home-header.html' %}
     <div id="pricing-container">
       <div id="pricing-wrapper" class="d-none">
-        <h1 id="pricing-headline">{% trans 'home.pricing.headline' %}</h1>
+        <h1 id="pricing-headline">{% trans 'pricing.headline' %}</h1>
         {% include 'pricing-content.html' %}
       </div>
     </div>
@@ -18,17 +18,6 @@
 
 <script>
   $(document).ready(function() {
-    var hasPersonalPackage = Cookie.find("expiration-has-personal-package");
-    var hasOwnOrganization = Cookie.find("expiration-has-own-organization");
-    var isOrganizationMember = Cookie.find("expiration-is-organization-member");
-    var userName = Cookie.find("expiration-user-name");
-    var homeToken = Cookie.find("home-token");
-    if (hasPersonalPackage != null && hasOwnOrganization != null &&
-      isOrganizationMember != null && userName != null && homeToken != null
-    ) {
-      window.location.href = "/expiration/";
-      return;
-    }
     displayLoader();
     setupPricing(function () {
       removeLoader();

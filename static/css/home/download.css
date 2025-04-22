@@ -1,11 +1,12 @@
-#download-mobile-container {
+#download-container {
   width: min(calc(1000px), 95%);
   margin: auto;
 }
 
-#download-mobile-headline {
+#download-headline {
   width: fit-content;
-  background-color: #2f333a;
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
   border-radius: 10px;
   padding: 10px 20px;
   margin-top: 20vh;
@@ -13,13 +14,13 @@
   margin-right: auto;
 }
 
-#download-mobile-description {
+#download-description {
   margin-top: 2vh;
   text-align: center;
   font-weight: bold;
 }
 
-#download-mobile-list {
+#download-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 100px;
@@ -27,14 +28,14 @@
   margin-bottom: 50vh;
 }
 
-.download-mobile-store {
+.download-store {
   position: relative;
   display: grid;
   text-align: center;
   margin: auto;
 }
 
-.download-mobile-button {
+.download-button {
   width: 384px;
   margin-left: auto;
   margin-right: auto;
@@ -42,24 +43,24 @@
   border: none;
 }
 
-.download-mobile-button img {
+.download-button img {
   width: 100%;
   height: 100%;
 }
 
 @media (max-width: 1750px) {
-  .download-mobile-button {
+  .download-button {
     width: 256px;
   }
 }
 
 @media (max-width: 1000px) {
-  #download-mobile-list {
+  #download-list {
     grid-template-columns: repeat(1, 1fr);
     margin-bottom: 30vh;
   }
 
-  #download-mobile-headline {
+  #download-headline {
     margin-top: 10vh;
   }
 }

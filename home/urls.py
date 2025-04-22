@@ -2,9 +2,8 @@ from django.urls import path, include
 from . import home
 
 urlpatterns = [
-  path('', home.product),
-  path('product/', home.product),
-  path('solution/', home.solution),
+  path('', home.home),
+  path('home/', home.home),
   path('download/', home.download),
   path('pricing/', home.pricing),
   path('question/', home.question),

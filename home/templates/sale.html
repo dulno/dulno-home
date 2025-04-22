@@ -2,56 +2,56 @@
 {% load i18n %}
 <html lang="en">
   {% include 'head.html' %}
-  <body class="dark" data-bs-theme="dark">
+  <body class="light" data-bs-theme="light">
     {% include 'home-header.html' %}
     <div id="sale-container">
-      <h1 id="sale-headline">{% trans 'home.sale.headline' %}</h1>
+      <h1 id="sale-headline">{% trans 'sale.headline' %}</h1>
       <div class="d-flex align-items-center mt-5 mb-5">
         <div class="sale-separator"></div>
-        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'home.sale.personal.information' %}</span>
+        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'sale.personal.information' %}</span>
         <div class="sale-separator"></div>
       </div>
       <div class="sale-section">
         <div class="form-outline mb-4">
-          <label for="sale-email" class="form-label">* {% trans 'home.sale.create.email' %} ({% trans 'home.sale.information.required' %})</label>
-          <input type="text" id="sale-email" class="form-control" placeholder="{% trans 'home.sale.create.email' %}">
+          <label for="sale-email" class="form-label">* {% trans 'sale.create.email' %} ({% trans 'sale.information.required' %})</label>
+          <input type="text" id="sale-email" class="form-control" placeholder="{% trans 'sale.create.email' %}">
         </div>
         <div class="sale-section-parallel">
           <div class="sale-section-parallel-left">
-            <label for="sale-first-name" class="form-label">* {% trans 'home.sale.create.first.name' %} ({% trans 'home.sale.information.required' %})</label>
-            <input type="text" id="sale-first-name" class="form-control" placeholder="{% trans 'home.sale.create.first.name' %}">
+            <label for="sale-first-name" class="form-label">* {% trans 'sale.create.first.name' %} ({% trans 'sale.information.required' %})</label>
+            <input type="text" id="sale-first-name" class="form-control" placeholder="{% trans 'sale.create.first.name' %}">
           </div>
           <div class="sale-section-parallel-right">
-            <label for="sale-last-name" class="form-label">* {% trans 'home.sale.create.last.name' %} ({% trans 'home.sale.information.required' %})</label>
-            <input type="text" id="sale-last-name" class="form-control" placeholder="{% trans 'home.sale.create.last.name' %}">
+            <label for="sale-last-name" class="form-label">* {% trans 'sale.create.last.name' %} ({% trans 'sale.information.required' %})</label>
+            <input type="text" id="sale-last-name" class="form-control" placeholder="{% trans 'sale.create.last.name' %}">
           </div>
         </div>
         <div class="sale-section-parallel">
           <div class="sale-section-parallel-left">
-            <label for="sale-phone-number" class="form-label">{% trans 'home.sale.create.phone.number' %}</label>
-            <input type="text" id="sale-phone-number" class="form-control" placeholder="{% trans 'home.sale.create.phone.number' %}">
+            <label for="sale-phone-number" class="form-label">{% trans 'sale.create.phone.number' %}</label>
+            <input type="text" id="sale-phone-number" class="form-control" placeholder="{% trans 'sale.create.phone.number' %}">
           </div>
           <div class="sale-section-parallel-right">
-            <label for="sale-country" class="form-label">{% trans 'home.sale.create.country' %}</label>
-            <input type="text" id="sale-country" class="form-control" placeholder="{% trans 'home.sale.create.country' %}">
+            <label for="sale-country" class="form-label">{% trans 'sale.create.country' %}</label>
+            <input type="text" id="sale-country" class="form-control" placeholder="{% trans 'sale.create.country' %}">
           </div>
         </div>
       </div>
       <div class="d-flex align-items-center mt-5 mb-5">
         <div class="sale-separator"></div>
-        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'home.sale.company.information' %}</span>
+        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'sale.company.information' %}</span>
         <div class="sale-separator"></div>
       </div>
       <div class="sale-section">
         <div class="sale-section-parallel">
           <div class="sale-section-parallel-left">
-            <label for="sale-company-name" class="form-label">{% trans 'home.sale.create.company.name' %}</label>
-            <input type="text" id="sale-company-name" class="form-control" placeholder="{% trans 'home.sale.create.company.name' %}">
+            <label for="sale-company-name" class="form-label">{% trans 'sale.create.company.name' %}</label>
+            <input type="text" id="sale-company-name" class="form-control" placeholder="{% trans 'sale.create.company.name' %}">
           </div>
           <div class="sale-section-parallel-right">
-            <label for="sale-company-size" class="form-label">{% trans 'home.sale.create.company.size' %}</label>
+            <label for="sale-company-size" class="form-label">{% trans 'sale.create.company.size' %}</label>
             <div class="dropdown">
-              <button id="sale-company-size" class="btn btn-secondary dropdown-toggle bg-dark w-100" type="button" data-bs-toggle="dropdown">{% trans 'home.sale.create.company.size' %}</button>
+              <button id="sale-company-size" class="btn btn-secondary dropdown-toggle bg-light w-100" type="button" data-bs-toggle="dropdown">{% trans 'sale.create.company.size' %}</button>
               <ul class="dropdown-menu w-100">
                 <li class="dropdown-item sale-company-size-entry">1 - 9</li>
                 <li class="dropdown-item sale-company-size-entry">10 - 49</li>
@@ -65,8 +65,8 @@
         </div>
         <div class="sale-section-parallel">
           <div class="sale-section-parallel-left">
-            <label for="sale-company-role" class="form-label">{% trans 'home.sale.create.company.role' %}</label>
-            <input type="text" id="sale-company-role" class="form-control" placeholder="{% trans 'home.sale.create.company.role' %}">
+            <label for="sale-company-role" class="form-label">{% trans 'sale.create.company.role' %}</label>
+            <input type="text" id="sale-company-role" class="form-control" placeholder="{% trans 'sale.create.company.role' %}">
           </div>
           <div class="sale-section-parallel-right">
           </div>
@@ -74,21 +74,21 @@
       </div>
       <div class="d-flex align-items-center mt-5 mb-5">
         <div class="sale-separator"></div>
-        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'home.sale.sale.information' %}</span>
+        <span class="text-center text-secondary text-nowrap fw-bold">{% trans 'sale.sale.information' %}</span>
         <div class="sale-separator"></div>
       </div>
       <div class="sale-section">
         <div class="form-outline mb-4">
-          <label for="sale-title" class="form-label">* {% trans 'home.sale.create.title' %} ({% trans 'home.sale.information.required' %})</label>
-          <input type="text" id="sale-title" class="form-control" placeholder="{% trans 'home.sale.create.title' %}">
+          <label for="sale-title" class="form-label">* {% trans 'sale.create.title' %} ({% trans 'sale.information.required' %})</label>
+          <input type="text" id="sale-title" class="form-control" placeholder="{% trans 'sale.create.title' %}">
         </div>
         <div class="form-outline mb-4">
-          <label for="sale-message" class="form-label">* {% trans 'home.sale.create.message' %} ({% trans 'home.sale.information.required' %})</label>
+          <label for="sale-message" class="form-label">* {% trans 'sale.create.message' %} ({% trans 'sale.information.required' %})</label>
           <div id="sale-message">
           </div>
         </div>
-        <p id="sale-create-note" class="text-secondary my-3">{% trans 'home.sale.create.note' %}</p>
-        <button type="button" id="sale-create" class="btn btn-primary btn-block disabled">{% trans 'home.sale.create' %}</button>
+        <p id="sale-create-note" class="text-secondary my-3">{% trans 'sale.create.note' %}</p>
+        <button type="button" id="sale-create" class="btn btn-primary btn-block disabled">{% trans 'sale.create' %}</button>
       </div>
     </div>
     {% include 'home-footer.html' %}
@@ -166,7 +166,7 @@
     let country = document.getElementById("sale-country").value;
     let companyName = document.getElementById("sale-company-name").value;
     let companySize = document.getElementById("sale-company-size").innerText;
-    if (companySize === "{% trans 'home.sale.create.company.size' %}") {
+    if (companySize === "{% trans 'sale.create.company.size' %}") {
       companySize = "";
     }
     let companyRole = document.getElementById("sale-company-role").value;
@@ -179,15 +179,15 @@
         message: message});
     request.send(function (status, responseText) {
       if (status !== 200) {
-        Swal.fire("{% trans 'home.sale.create.limit.title' %}", "{% trans 'home.sale.create.limit.body' %}", "error");
+        Swal.fire("{% trans 'sale.create.limit.title' %}", "{% trans 'sale.create.limit.body' %}", "error");
         return;
       }
       let success = JSON.parse(responseText).success;
       if (!success) {
-        Swal.fire("{% trans 'home.sale.create.failed.title' %}", "{% trans 'home.sale.create.failed.body' %}", "error");
+        Swal.fire("{% trans 'sale.create.failed.title' %}", "{% trans 'sale.create.failed.body' %}", "error");
         return;
       }
-      Swal.fire("{% trans 'home.sale.create.successful.title' %}", "{% trans 'home.sale.create.successful.body' %}", "success").then(success => window.location.href = "/");
+      Swal.fire("{% trans 'sale.create.successful.title' %}", "{% trans 'sale.create.successful.body' %}", "success").then(success => window.location.href = "/");
     });
   }
 </script>
