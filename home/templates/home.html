@@ -4,12 +4,12 @@
   {% include 'head.html' %}
   <body class="light" data-bs-theme="light">
     {% include 'home-header.html' %}
-    <div id="home-header">
+    <div id="home-header" class="home-content-even">
       <div id="home-header-content-wrapper">
         <div id="home-header-content">
           <div id="home-header-content-text" class="ms-xl-5 ms-3">
             <h4 class="me-auto ms-lg-0 ms-auto home-content-text-headline">{% trans 'home.headline' %}</h4>
-            <h1 id="home-slogan"><b>{% trans 'home.slogan' %}</b></h1>
+            <h1 id="home-slogan" class="text-lg-start text-center"><b>{% trans 'home.slogan' %}</b></h1>
             <h5 class="mt-4">{% trans 'home.description.1' %} <br class="home-linebreak">{% trans 'home.description.2' %}</h5>
             <div class="d-flex justify-content-lg-start justify-content-center">
               <a class="btn btn-dark px-lg-5 px-2 py-2 mt-5" href="https://portal.{{domain}}/signup/" role="button">{% trans 'home.try' %} <i class="fa-solid fa-arrow-right ms-2"></i></a>
@@ -74,58 +74,60 @@
         </div>
       </div>
     </div>
-    <div class="home-content my-5 py-5">
-      <div id="home-advantages-content" class="py-5">
-        <div id="home-advantages-content-text">
-          <div class="home-animation-left">
-            <h3 class="home-content-text-headline">{% trans 'home.advantages.headline' %}</h3>
-            <h1 class="home-content-text-slogan">{% trans 'home.advantages.slogan' %}</h1>
-            <p class="text-center">{% trans 'home.advantages.description' %}</p>
+    <div class="home-content-even">
+      <div class="home-content my-5 py-5">
+        <div id="home-advantages-content" class="py-5">
+          <div id="home-advantages-content-text">
+            <div class="home-animation-left">
+              <h3 class="home-content-text-headline">{% trans 'home.advantages.headline' %}</h3>
+              <h1 class="home-content-text-slogan">{% trans 'home.advantages.slogan' %}</h1>
+              <p class="text-center">{% trans 'home.advantages.description' %}</p>
+            </div>
+            <ul id="home-advantages-functions">
+              <li class="home-animation-down home-animation-delay-1">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-person-circle-question"></i>
+                </div>
+                <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
+                <p>{% trans 'home.advantages.forgot.description' %}</p>
+              </li>
+              <li class="home-animation-down home-animation-delay-2">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+                <h4>{% trans 'home.advantages.overview.headline' %}</h4>
+                <p>{% trans 'home.advantages.overview.description' %}</p>
+              </li>
+              <li class="home-animation-down home-animation-delay-3">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-wallet"></i>
+                </div>
+                <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
+                <p>{% trans 'home.advantages.comfort.description' %}</p>
+              </li>
+              <li class="home-animation-down home-animation-delay-1">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-tree"></i>
+                </div>
+                <h4>{% trans 'home.advantages.environment.headline' %}</h4>
+                <p>{% trans 'home.advantages.environment.description' %}</p>
+              </li>
+              <li class="home-animation-down home-animation-delay-2">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-user"></i>
+                </div>
+                <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
+                <p>{% trans 'home.advantages.loyalty.description' %}</p>
+              </li>
+              <li class="home-animation-down home-animation-delay-3">
+                <div class="home-advantages-functions-icon">
+                  <i class="fa-solid fa-chart-pie"></i>
+                </div>
+                <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
+                <p>{% trans 'home.advantages.analytics.description' %}</p>
+              </li>
+            </ul>
           </div>
-          <ul id="home-advantages-functions">
-            <li class="home-animation-down home-animation-delay-1">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-person-circle-question"></i>
-              </div>
-              <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
-              <p>{% trans 'home.advantages.forgot.description' %}</p>
-            </li>
-            <li class="home-animation-down home-animation-delay-2">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-eye"></i>
-              </div>
-              <h4>{% trans 'home.advantages.overview.headline' %}</h4>
-              <p>{% trans 'home.advantages.overview.description' %}</p>
-            </li>
-            <li class="home-animation-down home-animation-delay-3">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-wallet"></i>
-              </div>
-              <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
-              <p>{% trans 'home.advantages.comfort.description' %}</p>
-            </li>
-            <li class="home-animation-down home-animation-delay-1">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-tree"></i>
-              </div>
-              <h4>{% trans 'home.advantages.environment.headline' %}</h4>
-              <p>{% trans 'home.advantages.environment.description' %}</p>
-            </li>
-            <li class="home-animation-down home-animation-delay-2">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-user"></i>
-              </div>
-              <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
-              <p>{% trans 'home.advantages.loyalty.description' %}</p>
-            </li>
-            <li class="home-animation-down home-animation-delay-3">
-              <div class="home-advantages-functions-icon">
-                <i class="fa-solid fa-chart-pie"></i>
-              </div>
-              <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
-              <p>{% trans 'home.advantages.analytics.description' %}</p>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -138,43 +140,43 @@
               <h1 class="home-content-text-slogan">{% trans 'home.portal.slogan' %}</h1>
               <p class="text-center">{% trans 'home.portal.description' %}</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex flex-xxl-row flex-column justify-content-center align-items-center">
               <ul id="home-portal-features">
                 <li class="home-animation-down home-animation-delay-1">
                   <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-person-circle-question"></i>
+                    <i class="fa-solid fa-check"></i>
                   </div>
-                  <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
-                </li>
-                <li class="home-animation-down home-animation-delay-2">
-                  <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-eye"></i>
-                  </div>
-                  <h4>{% trans 'home.advantages.overview.headline' %}</h4>
-                </li>
-                <li class="home-animation-down home-animation-delay-3">
-                  <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-wallet"></i>
-                  </div>
-                  <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.cards' %}</h5>
                 </li>
                 <li class="home-animation-down home-animation-delay-1">
                   <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-tree"></i>
+                    <i class="fa-solid fa-check"></i>
                   </div>
-                  <h4>{% trans 'home.advantages.environment.headline' %}</h4>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.stamps' %}</h5>
                 </li>
                 <li class="home-animation-down home-animation-delay-2">
                   <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-solid fa-check"></i>
                   </div>
-                  <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.analysis' %}</h5>
+                </li>
+                <li class="home-animation-down home-animation-delay-2">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.balances' %}</h5>
                 </li>
                 <li class="home-animation-down home-animation-delay-3">
                   <div class="home-portal-features-icon">
-                    <i class="fa-solid fa-chart-pie"></i>
+                    <i class="fa-solid fa-check"></i>
                   </div>
-                  <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.campaigns' %}</h5>
+                </li>
+                <li class="home-animation-down home-animation-delay-3">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                  <h5 class="mb-0 fw-bold">{% trans 'home.portal.accessories' %}</h5>
                 </li>
               </ul>
               <div class="home-portal-space">
@@ -185,23 +187,26 @@
         </div>
       </div>
     </div>
-    <div class="home-content my-5 py-5">
-      <div id="home-download-content" class="py-5">
-        <div id="home-download-content-text">
-          <h3 class="home-content-text-headline">{% trans 'home.download.headline' %}</h3>
-          <h1 class="home-content-text-slogan">{% trans 'home.download.slogan' %}</h1>
-          <p class="text-center">{% trans 'home.download.description' %}</p>
-          <div id="home-download-list">
-            <div class="home-download-store">
-              <button onclick="location.href='https://play.google.com/store/apps/details?id=com.dulno.app&pcampaignid=web_share'" class="home-download-button"><img src="{% static 'img/home/google-play-store.webp' %}"></img></button>
-            </div>
-            <div class="home-download-store">
-              <button onclick="location.href=''" class="home-download-button"><img src="{% static 'img/home/apple-store.webp' %}"></img></button>
+    <div class="home-content-even">
+      <div class="home-content my-5 py-5">
+        <div id="home-download-content" class="py-5">
+          <div id="home-download-content-text">
+            <h3 class="home-content-text-headline">{% trans 'home.download.headline' %}</h3>
+            <h1 class="home-content-text-slogan">{% trans 'home.download.slogan' %}</h1>
+            <p class="text-center">{% trans 'home.download.description' %}</p>
+            <div id="home-download-list">
+              <div class="home-download-store">
+                <button onclick="location.href='https://play.google.com/store/apps/details?id=com.dulno.app&pcampaignid=web_share'" class="home-download-button"><img src="{% static 'img/home/google-play-store.webp' %}"></img></button>
+              </div>
+              <div class="home-download-store">
+                <button onclick="location.href=''" class="home-download-button"><img src="{% static 'img/home/apple-store.webp' %}"></img></button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <button id="home-scroll-up"><i class="fa-solid fa-arrow-up"></i></button>
     {% include 'home-footer.html' %}
   </body>
 </html>
@@ -264,14 +269,21 @@
       arrow.classList.remove("home-scroll-arrow-hidden");
     }
     const header = document.getElementById("navbar");
+    const scrollUp = document.getElementById("home-scroll-up");
     if (window.scrollY > 0) {
       header.classList.remove("navbar-static");
+      scrollUp.classList.add("home-scroll-up-visible");
     } else {
       header.classList.add("navbar-static");
+      scrollUp.classList.remove("home-scroll-up-visible");
     }
   });
 
   document.getElementById("home-scroll-arrow").addEventListener("click", function() {
-    window.scrollBy({top: window.innerHeight, behavior: "smooth"});
+    window.scrollTo({top: window.innerHeight, behavior: "smooth"});
+  });
+
+  document.getElementById("home-scroll-up").addEventListener("click", function() {
+    window.scrollTo({top: 0, behavior: "smooth"});
   });
 </script>

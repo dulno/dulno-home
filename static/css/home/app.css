@@ -1,9 +1,9 @@
-#download-container {
+#app-container {
   width: min(calc(1000px), 95%);
   margin: auto;
 }
 
-#download-headline {
+#app-headline {
   width: fit-content;
   background-color: rgba(13, 110, 253, 0.1);
   color: #0d6efd;
@@ -15,13 +15,13 @@
   margin-right: auto;
 }
 
-#download-description {
+#app-description {
   margin-top: 2vh;
   text-align: center;
   font-weight: bold;
 }
 
-#download-list {
+#app-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 100px;
@@ -29,14 +29,14 @@
   margin-bottom: 50vh;
 }
 
-.download-store {
+.app-store {
   position: relative;
   display: grid;
   text-align: center;
   margin: auto;
 }
 
-.download-button {
+.app-button {
   width: 320px;
   margin-left: auto;
   margin-right: auto;
@@ -44,24 +44,24 @@
   border: none;
 }
 
-.download-button img {
+.app-button img {
   width: 100%;
   height: 100%;
 }
 
 @media (max-width: 1750px) {
-  .download-button {
+  .app-button {
     width: 256px;
   }
 }
 
 @media (max-width: 1000px) {
-  #download-list {
+  #app-list {
     grid-template-columns: repeat(1, 1fr);
     margin-bottom: 30vh;
   }
 
-  #download-headline {
+  #app-headline {
     margin-top: 10vh;
   }
 }

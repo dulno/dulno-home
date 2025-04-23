@@ -10,8 +10,8 @@
       <a class="d-none d-lg-block ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
       <ul class="navbar-nav d-flex justify-content-center align-items-center ms-xl-5 ms-lg-4 ms-lg-3 ms-xxl-0">
         <li class="nav-item"><a class="nav-link {% if request.path == '/home/' or request.path == '/' %}active{% endif %}" href="/home/">{% trans 'header.home' %}</a></li>
-        <li class="nav-item"><a class="nav-link {% if 'download' in request.path %}active{% endif %}" href="/download/">{% trans 'header.download' %}</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.path == '/partner/' %}active{% endif %}" href="/partner/">{% trans 'header.partner' %}</a></li>
+        <li class="nav-item mx-3"><a class="nav-link {% if request.path == '/app/' %}active{% endif %}" href="/app/">{% trans 'header.app' %}</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.path == '/portal/' %}active{% endif %}" href="/portal/">{% trans 'header.portal' %}</a></li>
       </ul>
       <div class="d-flex justify-content-center justify-content-lg-end align-items-center flex-column-reverse flex-lg-row ms-auto ms-xxl-0 me-xl-5 me-lg-3 mt-4 mt-lg-0">
         <div class="mt-3 mt-lg-0">

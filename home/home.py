@@ -26,34 +26,22 @@ async def home(request):
       'css/base/home-footer.css', 'css/home/home.css'], 'isNavbarStatic': True})
 
 @home_page
-async def solution(request):
-  return render(request, 'solution.html', {'title': gettext("solution.title"),
+async def app(request):
+  return render(request, 'app.html', {'title': gettext("app.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/solution.css']})
+      'css/base/home-footer.css', 'css/home/app.css']})
 
 @home_page
-async def download(request):
-  return render(request, 'download.html', {'title': gettext("download.title"),
+async def portal(request):
+  return render(request, 'portal.html', {'title': gettext("portal.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/download.css']})
-
-@home_page
-async def pricing(request):
-  return render(request, 'pricing.html', {'title': gettext("pricing.title"),
-    'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/pricing.css', 'css/base/pricing-content.css']})
+      'css/base/home-footer.css', 'css/home/portal.css']})
 
 @home_page
 async def question(request):
   return render(request, 'question.html', {'title': gettext("question.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
       'css/base/home-footer.css', 'css/home/question.css']})
-
-@home_page
-async def sale(request):
-  return render(request, 'sale.html', {'title': gettext("sale.title"),
-    'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/sale.css']})
 
 @home_page
 async def imprint(request):
