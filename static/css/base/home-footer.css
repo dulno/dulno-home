@@ -48,7 +48,7 @@
 
 .home-footer-row a {
   text-decoration: none;
-  color: black;
+  color: #323232;
   font-size: 18px;
   overflow: hidden;
   white-space: nowrap;
@@ -59,7 +59,7 @@
 }
 
 .home-footer-row a:hover {
-  color: #616161;
+  color: black;
 }
 
 .home-footer-row h4 {

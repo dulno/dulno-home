@@ -31,16 +31,16 @@
               <h1 class="home-content-text-slogan">{% trans 'home.functionality.slogan' %}</h1>
               <p class="text-center">{% trans 'home.functionality.description' %}</p>
             </div>
-            <div class="d-flex justify-content-center align-items-center">
-              <div class="d-flex justify-content-end pe-5">
+            <div class="d-flex flex-md-row flex-column-reverse justify-content-center align-items-center">
+              <div class="d-flex justify-content-end pe-md-5">
                 <div id="home-functionality-scan-container">
                   <img id="home-functionality-scan-stamp" class="home-animation-opacity home-animation-delay-3" src="{% static 'img/home/stamp.webp' %}">
                   <img id="home-functionality-scan-phone" class="home-animation-fly" src="{% static 'img/home/scan.gif' %}">
                 </div>
               </div>
-              <div style="width: 150px;">
+              <div class="home-functionality-space">
               </div>
-              <ul class="home-functionality-steps ms-5">
+              <ul class="home-functionality-steps ms-md-5 mt-md-0 mt-4">
                 <li class="home-functionality-step home-animation-down home-animation-delay-1">
                   <div class="home-functionality-step-icon">
                     <i class="fa-solid fa-download"></i>
@@ -75,60 +75,112 @@
       </div>
     </div>
     <div class="home-content my-5 py-5">
+      <div id="home-advantages-content" class="py-5">
+        <div id="home-advantages-content-text">
+          <div class="home-animation-left">
+            <h3 class="home-content-text-headline">{% trans 'home.advantages.headline' %}</h3>
+            <h1 class="home-content-text-slogan">{% trans 'home.advantages.slogan' %}</h1>
+            <p class="text-center">{% trans 'home.advantages.description' %}</p>
+          </div>
+          <ul id="home-advantages-functions">
+            <li class="home-animation-down home-animation-delay-1">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-person-circle-question"></i>
+              </div>
+              <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
+              <p>{% trans 'home.advantages.forgot.description' %}</p>
+            </li>
+            <li class="home-animation-down home-animation-delay-2">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <h4>{% trans 'home.advantages.overview.headline' %}</h4>
+              <p>{% trans 'home.advantages.overview.description' %}</p>
+            </li>
+            <li class="home-animation-down home-animation-delay-3">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
+              <p>{% trans 'home.advantages.comfort.description' %}</p>
+            </li>
+            <li class="home-animation-down home-animation-delay-1">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-tree"></i>
+              </div>
+              <h4>{% trans 'home.advantages.environment.headline' %}</h4>
+              <p>{% trans 'home.advantages.environment.description' %}</p>
+            </li>
+            <li class="home-animation-down home-animation-delay-2">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
+              <p>{% trans 'home.advantages.loyalty.description' %}</p>
+            </li>
+            <li class="home-animation-down home-animation-delay-3">
+              <div class="home-advantages-functions-icon">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
+              <p>{% trans 'home.advantages.analytics.description' %}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="home-content-odd">
       <div class="home-content my-5 py-5">
-        <div id="home-advanced-content" class="py-5">
-          <div id="home-advanced-content-text">
+        <div id="home-portal-content" class="py-5">
+          <div id="home-portal-content-text">
             <div class="home-animation-left">
-              <h3 class="home-content-text-headline">{% trans 'home.advanced.headline' %}</h3>
-              <h1 class="home-content-text-slogan">{% trans 'home.advanced.slogan' %}</h1>
-              <p class="text-center">{% trans 'home.advanced.description' %}</p>
+              <h3 class="home-content-text-headline">{% trans 'home.portal.headline' %}</h3>
+              <h1 class="home-content-text-slogan">{% trans 'home.portal.slogan' %}</h1>
+              <p class="text-center">{% trans 'home.portal.description' %}</p>
             </div>
-            <ul id="home-advanced-functions">
-              <li class="home-animation-down home-animation-delay-1">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-user"></i>
-                </div>
-                <h4>{% trans 'home.advanced.account.headline' %}</h4>
-                <p>{% trans 'home.advanced.account.description' %}</p>
-              </li>
-              <li class="home-animation-down home-animation-delay-2">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-clock-rotate-left"></i>
-                </div>
-                <h4>{% trans 'home.advanced.timeline.headline' %}</h4>
-                <p>{% trans 'home.advanced.timeline.description' %}</p>
-              </li>
-              <li class="home-animation-down home-animation-delay-3">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-solid fa-filter"></i>
-                </div>
-                <h4>{% trans 'home.advanced.condition.headline' %}</h4>
-                <p>{% trans 'home.advanced.condition.description' %}</p>
-              </li>
-              <li class="home-animation-down home-animation-delay-1">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-tower-broadcast"></i>
-                </div>
-                <h4>{% trans 'home.advanced.webhook.headline' %}</h4>
-                <p>{% trans 'home.advanced.webhook.description' %}</p>
-              </li>
-              <li class="home-animation-down home-animation-delay-2">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-database"></i>
-                </div>
-                <h4>{% trans 'home.advanced.database.headline' %}</h4>
-                <p>{% trans 'home.advanced.database.description' %}</p>
-              </li>
-              <li class="home-animation-down home-animation-delay-3">
-                <div class="home-advanced-functions-icon">
-                  <i class="fa-solid fa-sheet-plastic"></i>
-                </div>
-                <h4>{% trans 'home.advanced.template.headline' %}</h4>
-                <p>{% trans 'home.advanced.template.description' %}</p>
-              </li>
-            </ul>
+            <div class="d-flex justify-content-center align-items-center">
+              <ul id="home-portal-features">
+                <li class="home-animation-down home-animation-delay-1">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-person-circle-question"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
+                </li>
+                <li class="home-animation-down home-animation-delay-2">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-eye"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.overview.headline' %}</h4>
+                </li>
+                <li class="home-animation-down home-animation-delay-3">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
+                </li>
+                <li class="home-animation-down home-animation-delay-1">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-tree"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.environment.headline' %}</h4>
+                </li>
+                <li class="home-animation-down home-animation-delay-2">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
+                </li>
+                <li class="home-animation-down home-animation-delay-3">
+                  <div class="home-portal-features-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
+                </li>
+              </ul>
+              <div class="home-portal-space">
+              </div>
+              <img id="home-portal-logo" class="home-animation-fly" src="{% static 'img/home/portal.webp' %}">
+            </div>
           </div>
         </div>
       </div>
