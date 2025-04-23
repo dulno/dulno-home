@@ -122,6 +122,8 @@ msgid "home.download.slogan"
 msgstr "Laden Sie jetzt die Dulno-App herunter"
 msgid "home.download.description"
 msgstr "Die Dulno-App ist sowohl im Google Play Store als auch im Apple Store erhältlich"
+msgid "home.more"
+msgstr "Mehr erfahren"
 
 # APP
 msgid "app.title"

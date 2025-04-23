@@ -469,10 +469,12 @@ p {
   0%, 20% {
     scale: 1;
     background-color: rgba(13, 110, 253, 0.1);
+    color: rgba(13, 110, 253, 0.8);
   }
   10%, 15% {
-    scale: 1.1;
-    background-color: rgba(13, 110, 253, 0.25);
+    scale: 1.15;
+    background-color: rgba(13, 110, 253, 0.2);
+    color: rgba(13, 110, 253, 1);
   }
 }
 
