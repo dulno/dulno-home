@@ -1,23 +1,27 @@
 {% load static %}
 {% load i18n %}
-<nav class="navbar navbar-expand-lg {% if isNavbarStatic %}navbar-static{% endif %}" id="navbar">
-  <a class="navbar-brand d-block d-lg-none ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
+<nav class="navbar navbar-expand-xl {% if isNavbarStatic %}navbar-static{% endif %}" id="navbar">
+  <a class="navbar-brand d-block d-xl-none ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
   <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbar-content">
-    <div class="d-block d-lg-flex justify-content-xxl-between align-items-center mb-3 my-lg-0" id="navbar-content-wrapper">
-      <a class="d-none d-lg-block ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
-      <ul class="navbar-nav d-flex justify-content-center align-items-center ms-xl-5 ms-lg-4 ms-lg-3 ms-xxl-0">
-        <li class="nav-item"><a class="nav-link {% if request.path == '/home/' or request.path == '/' %}active{% endif %}" href="/home/">{% trans 'header.home' %}</a></li>
-        <li class="nav-item mx-3"><a class="nav-link {% if request.path == '/app/' %}active{% endif %}" href="/app/">{% trans 'header.app' %}</a></li>
-        <li class="nav-item"><a class="nav-link {% if request.path == '/portal/' %}active{% endif %}" href="/portal/">{% trans 'header.portal' %}</a></li>
+    <div class="d-block d-xl-flex justify-content-xxl-between align-items-center mb-3 my-xl-0" id="navbar-content-wrapper">
+      <a class="d-none d-xl-block ms-xl-5 ms-3" href="/"><img class="navbar-logo" src="{% static 'img/logo-header.webp' %}" alt=""></a>
+      <ul class="navbar-nav d-flex justify-content-center align-items-center ms-xl-5 ms-xl-4 ms-xl-3 ms-xxl-0">
+        <li class="nav-item"><a class="nav-link {% if request.path == '/' and request.path == '/home/' %}active{% endif %}" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#home">{% trans 'header.home' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#functionality">{% trans 'header.functionality' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#advantages">{% trans 'header.advantages' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#portal">{% trans 'header.portal' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#pricing">{% trans 'header.pricing' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#download">{% trans 'header.download' %}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#contact">{% trans 'header.contact' %}</a></li>
       </ul>
-      <div class="d-flex justify-content-center justify-content-lg-end align-items-center flex-column-reverse flex-lg-row ms-auto ms-xxl-0 me-xl-5 me-lg-3 mt-4 mt-lg-0">
-        <div class="mt-3 mt-lg-0">
+      <div class="d-flex justify-content-center justify-content-xl-end align-items-center flex-column-reverse flex-xl-row ms-auto ms-xxl-0 me-xl-5 me-xl-3 mt-4 mt-xl-0">
+        <div class="mt-3 mt-xl-0">
           {% include 'home-language.html' %}
         </div>
-        <a href="https://portal.{{domain}}/login/" class="btn btn-primary ms-lg-4" id="login-button" role="button"><i class="fa-solid fa-right-to-bracket me-2"></i> {% trans 'header.login' %}</a>
+        <a href="https://portal.{{domain}}/login/" class="btn btn-primary ms-xl-4" id="login-button" role="button"><i class="fa-solid fa-right-to-bracket me-2"></i> {% trans 'header.login' %}</a>
       </div>
     </div>
   </div>

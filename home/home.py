@@ -23,25 +23,8 @@ def applyLanguage(request):
 async def home(request):
   return render(request, 'home.html', {'title': gettext("home.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/home.css'], 'isNavbarStatic': True})
-
-@home_page
-async def app(request):
-  return render(request, 'app.html', {'title': gettext("app.title"),
-    'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/app.css']})
-
-@home_page
-async def portal(request):
-  return render(request, 'portal.html', {'title': gettext("portal.title"),
-    'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/portal.css']})
-
-@home_page
-async def question(request):
-  return render(request, 'question.html', {'title': gettext("question.title"),
-    'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/question.css']})
+      'css/base/home-footer.css', 'css/home/home.css', 'css/base/pricing-content.css'],
+    'isNavbarStatic': True})
 
 @home_page
 async def imprint(request):

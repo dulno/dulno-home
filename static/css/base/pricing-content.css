@@ -72,7 +72,7 @@
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
-  border-spacing: 15px 0;
+  border-spacing: 40px 0;
 }
 
 @media (max-width: 1350px) {
@@ -85,75 +85,8 @@
   background-color: transparent !important;
 }
 
-.pricing-table {
-  width: 100%;
-  margin: auto;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 15px 0;
-}
-
-.pricing-table-advantages {
-  width: 20% !important;
-  position: relative;
-  text-align: center;
-}
-
-.pricing-table-advantages-logo {
-  width: calc(70%);
-  height: calc(70%);
-}
-
-.pricing-table-divider {
-  width: 100%;
-  height: 0;
-  border-bottom: 1px solid #2b333f;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
-}
-
-.pricing-table tr {
-  width: 20%;
-  text-align: center;
-}
-
-.pricing-table tr td {
-  padding: 12px;
-}
-
-.pricing-table tr td {
-  border-bottom: 1px solid black;
-}
-
-.pricing-table tr:last-child td {
-  border-bottom: none;
-}
-
-#pricing-table-container-desktop .pricing-table tbody tr:first-child td:nth-child(3) {
-  border-top: 3px solid var(--pricing-package-highlight-color);
-}
-
-#pricing-table-container-desktop .pricing-table tbody tr:last-child td:nth-child(3) {
-  border-bottom: 3px solid var(--pricing-package-highlight-color);
-}
-
-#pricing-table-container-desktop .pricing-table td:nth-child(3) {
-  border-left: 3px solid var(--pricing-package-highlight-color);
-  border-right: 3px solid var(--pricing-package-highlight-color);
-}
-
-.pricing-table tbody tr:first-child td {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
-.pricing-table tbody tr:last-child td {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
 .pricing-package {
-  width: 20%;
+  width: calc(100% / 3);
   position: sticky !important;
   top: 87px;
   z-index: 99 !important;
@@ -249,11 +182,11 @@
 }
 
 #pricing-table-container-desktop .pricing-package-professional {
-  border: 1px solid var(--pricing-package-highlight-color);
-  outline: 2px solid var(--pricing-package-highlight-color);
+  border: 3px solid var(--pricing-package-highlight-color);
   background-color: var(--pricing-package-highlight-background);
   z-index: 0 !important;
   padding: 9px 29px;
+  scale: 1.075;
 }
 
 .pricing-package-enterprise-price {
@@ -279,7 +212,7 @@
 
 .pricing-feature {
   text-align: left !important;
-  width: 20% !important;
+  width: calc(100% / 3) !important;
   color: black !important;
 }
 

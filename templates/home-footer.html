@@ -8,9 +8,9 @@
       </div>
       <div class="home-footer-row">
         <h4 class="home-footer-row-headline">{% trans 'footer.pages' %}</h4>
-        <a href="/home/">{% trans 'header.home' %}</a><br>
-        <a href="/app/">{% trans 'header.app' %}</a><br>
-        <a href="/portal/">{% trans 'header.portal' %}</a>
+        <a href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#home">{% trans 'header.home' %}</a><br>
+        <a href="https://portal.{{domain}}/login/">{% trans 'header.login' %}</a>
+        <a href="https://portal.{{domain}}/signup/">{% trans 'header.signup' %}</a>
       </div>
       <div class="home-footer-row">
         <h4 class="home-footer-row-headline">{% trans 'footer.social.media' %}</h4>

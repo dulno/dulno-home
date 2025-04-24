@@ -6,18 +6,18 @@ h1, h3 {
   font-family: 'Lato', serif;
 }
 
-p {
+div:not(#pricing) > p {
   font-size: 20px;
 }
 
 @media (max-width: 1000px) {
-  p {
+  div:not(#pricing) > p {
     font-size: 18px;
   }
 }
 
 @media (max-width: 800px) {
-  p {
+  div:not(#pricing) > p {
     font-size: 16px;
   }
 }
@@ -627,6 +627,11 @@ p {
   }
 }
 
+#home-pricing-content-text {
+  width: min(calc(1000px), 100%);
+  margin: auto;
+}
+
 #home-download-content-text {
   width: min(calc(1200px), 100%);
   margin: 6vh auto;
@@ -670,6 +675,40 @@ p {
   #home-download-list {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+
+.form-label {
+  text-align: left;
+  width: 100%;
+  font-size: 18px;
+}
+
+#home-contact-content-text {
+  width: min(calc(1000px), 100%);
+  margin: auto;
+}
+
+#home-contact-headline {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 8vh;
+  margin-bottom: 8vh;
+}
+
+#home-contact-message {
+  height: 300px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.ql-editor::-webkit-scrollbar {
+  width: 14px;
+}
+
+.ql-toolbar {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  text-align: left;
 }
 
 #home-scroll-up {
