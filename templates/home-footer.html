@@ -1,51 +1,46 @@
 {% load static %}
 {% load i18n %}
 <div id="home-footer">
-  <div id="home-footer-wave-background"></div>
-  <svg class="home-wave" x="0px" y="0px" viewBox="0 0 1440 110">
-    <path d="M685.6,38.8C418.7-11.1,170.2,9.9,0,30v96h1440V30C1252.7,52.2,1010,99.4,685.6,38.8z"/>
-  </svg>
   <div id="home-footer-content">
     <div id="home-footer-content-links">
-      <img id="home-footer-logo" src="{% static 'img/logo-light.webp' %}" alt="">
       <div class="home-footer-row">
-        <h4 class="home-footer-row-headline">{% trans 'home.footer.pages' %}</h4>
-        <a href="/product/">{% trans 'home.header.product' %}</a><br>
-        <a href="/solution/">{% trans 'home.header.solution' %}</a><br>
-        <a href="/download/">{% trans 'home.header.download' %}</a><br>
-        <a href="/pricing/">{% trans 'home.header.pricing' %}</a>
+        <img id="home-footer-logo" src="{% static 'img/logo-dark.webp' %}" alt="">
       </div>
       <div class="home-footer-row">
-        <h4 class="home-footer-row-headline">{% trans 'home.footer.social.media' %}</h4>
+        <h4 class="home-footer-row-headline">{% trans 'footer.pages' %}</h4>
+        <a href="/">{% trans 'header.home' %}</a><br>
+        <a href="https://portal.{{domain}}/login/">{% trans 'header.login' %}</a>
+        <a href="https://portal.{{domain}}/signup/">{% trans 'header.signup' %}</a>
+      </div>
+      <div class="home-footer-row">
+        <h4 class="home-footer-row-headline">{% trans 'footer.social.media' %}</h4>
         <ul id="home-footer-social-media">
-          <li onclick="location.href='https://www.youtube.com/@DulnoCompany'"><i class="fa-brands fa-youtube"></i></li>
+          <li onclick="location.href='https://www.linkedin.com/company/dulno/'"><i class="fa-brands fa-linkedin-in"></i></li>
           <li onclick="location.href='https://twitter.com/DulnoCompany'"><i class="fa-brands fa-x-twitter"></i></li>
           <li onclick="location.href='https://www.instagram.com/DulnoCompany'"><i class="fa-brands fa-instagram"></i></li>
-          <li onclick="location.href='https://www.linkedin.com/company/dulno/'"><i class="fa-brands fa-linkedin-in"></i></li>
-          <li onclick="location.href='https://discord.gg/e6mv74RYhU'"><i class="fa-brands fa-discord"></i></li>
-          <li onclick="location.href='https://github.com/Dulno'"><i class="fa-brands fa-github"></i></li>
         </ul>
       </div>
       <div class="home-footer-row">
-        <h4 class="home-footer-row-headline">{% trans 'home.footer.help' %}</h4>
-        <a href="https://documentation.{{domain}}/">{% trans 'home.footer.documentation' %}</a><br>
-        <button id="home-footer-contact" class="btn btn-light mt-3" onclick="location.href='/question/'">{% trans 'home.footer.contact' %}</button>
+        <h4 class="home-footer-row-headline">{% trans 'footer.help' %}</h4>
+        <button id="home-footer-contact" class="btn btn-dark mt-3">{% trans 'footer.contact' %}</button>
       </div>
       <div class="home-footer-row">
-        <h4 class="home-footer-row-headline">{% trans 'home.footer.legal' %}</h4>
-        <a href="/imprint/">{% trans 'home.footer.imprint' %}</a><br>
-        <a href="/privacy-policy/">{% trans 'home.footer.privacy.policy' %}</a><br>
-        <a href="/terms-of-service/">{% trans 'home.footer.terms.of.service' %}</a><br>
+        <h4 class="home-footer-row-headline">{% trans 'footer.legal' %}</h4>
+        <a href="/imprint/">{% trans 'footer.imprint' %}</a><br>
+        <a href="/privacy-policy/">{% trans 'footer.privacy.policy' %}</a><br>
+        <a href="/terms-of-service/">{% trans 'footer.terms.of.service' %}</a><br>
       </div>
     </div>
-    <h5 id="home-footer-copyright">© Dulno</h5>
+    <div class="home-footer-divider my-5"></div>
+    <h5 id="home-footer-copyright" class="text-center mt-5">© <b>Dulno</b>.</h5>
+    <h5 class="text-center">All Rights Reserved.</h5>
   </div>
 </div>
 
 <script>
   $(document).ready(function() {
     document.getElementById("home-footer-copyright").innerHTML =
-      "© " + new Date().getFullYear() + " Dulno";
+      "© " + new Date().getFullYear() + " <b>Dulno</b>.";
     resizeDividers();
   });
 
@@ -61,4 +56,8 @@
       svg.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
     }
   }
+
+  document.getElementById("home-footer-contact").addEventListener("click", function(event) {
+    window.location.href = "{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#contact";
+  });
 </script>
