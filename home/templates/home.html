@@ -258,9 +258,7 @@
 <script>
   $(document).ready(function() {
     setupPricing(function () {});
-    const scrollSpy = new bootstrap.ScrollSpy(document.body, {
-      target: '#navbar'
-    })
+    new bootstrap.ScrollSpy(document.body, {target: '#navbar'});
     checkAnimations();
     $(window).scroll(function() {
       checkAnimations();
@@ -375,8 +373,8 @@
     let email = document.getElementById("home-contact-email").value;
     let title = document.getElementById("home-contact-title").value;
     let message =  document.getElementsByClassName("ql-editor")[0].innerHTML;
-    let request = new HttpRequest("/contact/create/", "POST",
-      [], {email: email, title: title, contact: message});
+    let request = new HttpRequest("/question/create/", "POST",
+      [], {email: email, title: title, question: message});
     request.send(function (status, responseText) {
       if (status !== 200) {
         Swal.fire("{% trans 'home.contact.create.limit.title' %}", "{% trans 'home.contact.create.limit.body' %}", "error");
