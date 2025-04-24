@@ -8,7 +8,7 @@
       </div>
       <div class="home-footer-row">
         <h4 class="home-footer-row-headline">{% trans 'footer.pages' %}</h4>
-        <a href="{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#home">{% trans 'header.home' %}</a><br>
+        <a href="/">{% trans 'header.home' %}</a><br>
         <a href="https://portal.{{domain}}/login/">{% trans 'header.login' %}</a>
         <a href="https://portal.{{domain}}/signup/">{% trans 'header.signup' %}</a>
       </div>
@@ -22,7 +22,7 @@
       </div>
       <div class="home-footer-row">
         <h4 class="home-footer-row-headline">{% trans 'footer.help' %}</h4>
-        <button id="home-footer-contact" class="btn btn-dark mt-3" onclick="location.href='/question/'">{% trans 'footer.contact' %}</button>
+        <button id="home-footer-contact" class="btn btn-dark mt-3">{% trans 'footer.contact' %}</button>
       </div>
       <div class="home-footer-row">
         <h4 class="home-footer-row-headline">{% trans 'footer.legal' %}</h4>
@@ -56,4 +56,8 @@
       svg.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width} ${bbox.height}`);
     }
   }
+
+  document.getElementById("home-footer-contact").addEventListener("click", function(event) {
+    window.location.href = "{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#contact";
+  });
 </script>
