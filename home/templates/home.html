@@ -1,0 +1,391 @@
+{% load static %}
+{% load i18n %}
+<html lang="en">
+  {% include 'head.html' %}
+  <body class="light" data-bs-theme="light" data-spy="scroll">
+    {% include 'home-header.html' %}
+    <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+      <div id="home" class="home-content-even">
+        <div id="home-header-content-wrapper">
+          <div id="home-header-content">
+            <div id="home-header-content-text" class="ms-xl-5 ms-3">
+              <h4 class="me-auto ms-lg-0 ms-auto home-content-text-headline">{% trans 'home.headline' %}</h4>
+              <h1 id="home-slogan" class="text-lg-start text-center"><b>{% trans 'home.slogan' %}</b></h1>
+              <h5 class="mt-4">{% trans 'home.description.1' %} <br class="home-linebreak">{% trans 'home.description.2' %}</h5>
+              <div class="d-flex justify-content-lg-start justify-content-center">
+                <a class="btn btn-dark px-lg-5 px-2 py-2 mt-5" href="https://portal.{{domain}}/signup/" role="button">{% trans 'home.try' %} <i class="fa-solid fa-arrow-right ms-2"></i></a>
+              </div>
+            </div>
+            <div id="home-logo-container" class="me-xl-4 me-3">
+              <img id="home-logo" src="{% static 'img/home/home.webp' %}">
+            </div>
+          </div>
+          <div id="home-scroll-arrow">&#x2193;</div>
+        </div>
+      </div>
+      <div id="functionality" class="home-content-odd">
+        <div class="home-content my-5 py-5">
+          <div class="py-5">
+            <div id="home-functionality-content">
+              <div class="home-animation-opacity">
+                <h3 class="home-content-text-headline">{% trans 'home.functionality.headline' %}</h3>
+                <h1 class="home-content-text-slogan">{% trans 'home.functionality.slogan' %}</h1>
+                <p class="text-center">{% trans 'home.functionality.description' %}</p>
+              </div>
+              <div class="d-flex flex-md-row flex-column-reverse justify-content-center align-items-center">
+                <div class="d-flex justify-content-end pe-md-5">
+                  <div id="home-functionality-scan-container">
+                    <img id="home-functionality-scan-stamp" class="home-animation-opacity home-animation-delay-3" src="{% static 'img/home/stamp.webp' %}">
+                    <img id="home-functionality-scan-phone" class="home-animation-fly" src="{% static 'img/home/scan.gif' %}">
+                  </div>
+                </div>
+                <div class="home-functionality-space">
+                </div>
+                <ul class="home-functionality-steps ms-md-5 mt-md-0 mt-4">
+                  <li class="home-functionality-step home-animation-down home-animation-delay-1">
+                    <div class="home-functionality-step-icon">
+                      <i class="fa-solid fa-download"></i>
+                    </div>
+                    <div>
+                      <h5 class="fw-bold">{% trans 'home.functionality.step.1.headline' %}</h5>
+                      <span class="home-functionality-step-description">{% trans 'home.functionality.step.1.description' %}</span>
+                    </div>
+                  </li>
+                  <li class="home-functionality-step home-animation-down home-animation-delay-2">
+                    <div class="home-functionality-step-icon">
+                      <i class="fa-solid fa-stamp"></i>
+                    </div>
+                    <div>
+                      <h5 class="fw-bold">{% trans 'home.functionality.step.2.headline' %}</h5>
+                      <span>{% trans 'home.functionality.step.2.description' %}</span>
+                    </div>
+                  </li>
+                  <li class="home-functionality-step home-animation-down home-animation-delay-3">
+                    <div class="home-functionality-step-icon">
+                      <i class="fa-regular fa-face-laugh-beam"></i>
+                    </div>
+                    <div>
+                      <h5 class="fw-bold">{% trans 'home.functionality.step.3.headline' %}</h5>
+                      <span>{% trans 'home.functionality.step.3.description' %}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="advantages" class="home-content-even">
+        <div class="home-content my-5 py-5">
+          <div id="home-advantages-content" class="py-5">
+            <div id="home-advantages-content-text">
+              <div class="home-animation-left">
+                <h3 class="home-content-text-headline">{% trans 'home.advantages.headline' %}</h3>
+                <h1 class="home-content-text-slogan">{% trans 'home.advantages.slogan' %}</h1>
+                <p class="text-center">{% trans 'home.advantages.description' %}</p>
+              </div>
+              <ul id="home-advantages-functions">
+                <li class="home-animation-down home-animation-delay-1">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-person-circle-question"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.forgot.headline' %}</h4>
+                  <p>{% trans 'home.advantages.forgot.description' %}</p>
+                </li>
+                <li class="home-animation-down home-animation-delay-2">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-eye"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.overview.headline' %}</h4>
+                  <p>{% trans 'home.advantages.overview.description' %}</p>
+                </li>
+                <li class="home-animation-down home-animation-delay-3">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-wallet"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.comfort.headline' %}</h4>
+                  <p>{% trans 'home.advantages.comfort.description' %}</p>
+                </li>
+                <li class="home-animation-down home-animation-delay-1">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-tree"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.environment.headline' %}</h4>
+                  <p>{% trans 'home.advantages.environment.description' %}</p>
+                </li>
+                <li class="home-animation-down home-animation-delay-2">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.loyalty.headline' %}</h4>
+                  <p>{% trans 'home.advantages.loyalty.description' %}</p>
+                </li>
+                <li class="home-animation-down home-animation-delay-3">
+                  <div class="home-advantages-functions-icon">
+                    <i class="fa-solid fa-chart-pie"></i>
+                  </div>
+                  <h4>{% trans 'home.advantages.analytics.headline' %}</h4>
+                  <p>{% trans 'home.advantages.analytics.description' %}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="portal" class="home-content-odd">
+        <div class="home-content my-5 py-5">
+          <div id="home-portal-content" class="py-5">
+            <div id="home-portal-content-text">
+              <div class="home-animation-left">
+                <h3 class="home-content-text-headline">{% trans 'home.portal.headline' %}</h3>
+                <h1 class="home-content-text-slogan">{% trans 'home.portal.slogan' %}</h1>
+                <p class="text-center">{% trans 'home.portal.description' %}</p>
+              </div>
+              <div class="d-flex flex-xxl-row flex-column justify-content-center align-items-center">
+                <ul id="home-portal-features">
+                  <li class="home-animation-down home-animation-delay-1">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.cards' %}</h5>
+                  </li>
+                  <li class="home-animation-down home-animation-delay-1">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.stamps' %}</h5>
+                  </li>
+                  <li class="home-animation-down home-animation-delay-2">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.analysis' %}</h5>
+                  </li>
+                  <li class="home-animation-down home-animation-delay-2">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.balances' %}</h5>
+                  </li>
+                  <li class="home-animation-down home-animation-delay-3">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.campaigns' %}</h5>
+                  </li>
+                  <li class="home-animation-down home-animation-delay-3">
+                    <div class="home-portal-features-icon">
+                      <i class="fa-solid fa-check"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">{% trans 'home.portal.accessories' %}</h5>
+                  </li>
+                </ul>
+                <div class="home-portal-space">
+                </div>
+                <img id="home-portal-logo" class="home-animation-fly" src="{% static 'img/home/portal.webp' %}">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="pricing" class="home-content-even">
+        <div class="home-content my-5 py-5">
+          <div id="home-pricing-content" class="py-5">
+            <div id="home-pricing-content-text">
+              <div class="home-animation-left">
+                <h3 class="home-content-text-headline">{% trans 'home.pricing.headline' %}</h3>
+                <h1 class="home-content-text-slogan">{% trans 'home.pricing.slogan' %}</h1>
+                <p class="text-center">{% trans 'home.pricing.description' %}</p>
+              </div>
+              {% include 'pricing-content.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="download" class="home-content-odd">
+        <div class="home-content my-5 py-5">
+          <div id="home-download-content" class="py-5">
+            <div id="home-download-content-text">
+              <h3 class="home-content-text-headline">{% trans 'home.download.headline' %}</h3>
+              <h1 class="home-content-text-slogan">{% trans 'home.download.slogan' %}</h1>
+              <p class="text-center">{% trans 'home.download.description' %}</p>
+              <div id="home-download-list">
+                <div class="home-download-store home-animation-left">
+                  <button onclick="location.href='https://play.google.com/store/apps/details?id=com.dulno.app&pcampaignid=web_share'" class="home-download-button"><img src="{% static 'img/home/google-play-store.webp' %}"></img></button>
+                </div>
+                <div class="home-download-store home-animation-right">
+                  <button onclick="location.href=''" class="home-download-button"><img src="{% static 'img/home/apple-store.webp' %}"></img></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="contact" class="home-content-even">
+        <div class="home-content my-5 py-5">
+          <div id="home-contact-content" class="py-5">
+            <div id="home-contact-content-text">
+              <h3 class="home-content-text-headline mb-4">{% trans 'home.contact.headline' %}</h3>
+              <div class="form-outline mb-3">
+                <label for="home-contact-email" class="form-label">* {% trans 'home.contact.create.email' %} ({% trans 'home.contact.information.required' %})</label>
+                <input type="text" id="home-contact-email" class="form-control" placeholder="{% trans 'home.contact.create.email' %}">
+              </div>
+              <div class="form-outline mb-3">
+                <label for="home-contact-title" class="form-label">* {% trans 'home.contact.create.title' %} ({% trans 'home.contact.information.required' %})</label>
+                <input type="text" id="home-contact-title" class="form-control" placeholder="{% trans 'home.contact.create.title' %}">
+              </div>
+              <div class="form-outline">
+                <label for="home-contact-message" class="form-label">* {% trans 'home.contact.create.message' %} ({% trans 'home.contact.information.required' %})</label>
+                <div id="home-contact-message">
+                </div>
+              </div>
+              <div class="mt-2">
+                <small id="home-contact-create-note" class="text-secondary">{% trans 'home.contact.create.note' %}</small>
+              </div>
+              <div class="text-center mt-4">
+                <button type="button" id="home-contact-create" class="btn btn-dark px-5 btn-block disabled">{% trans 'home.contact.create' %}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="home-scroll-up"><i class="fa-solid fa-arrow-up"></i></button>
+    </div>
+    {% include 'home-footer.html' %}
+  </body>
+</html>
+
+<script>
+  $(document).ready(function() {
+    setupPricing(function () {});
+    new bootstrap.ScrollSpy(document.body, {target: '#navbar'});
+    checkAnimations();
+    $(window).scroll(function() {
+      checkAnimations();
+    });
+  });
+
+  function checkAnimations() {
+    checkAnimation("home-animation-opacity", "home-animation-opacity-show");
+    checkAnimation("home-animation-left", "home-animation-left-show");
+    checkAnimation("home-animation-right", "home-animation-right-show");
+    checkAnimation("home-animation-down", "home-animation-down-show");
+    checkAnimation("home-animation-fly", "home-animation-fly-show");
+  }
+
+  function checkAnimation(elementClass, animationClass) {
+    let elements = document.getElementsByClassName(elementClass);
+    for (let i = 0; i < elements.length; i++) {
+      let element = elements[i];
+      let bottom_of_object = element.getBoundingClientRect().top - window.screen.height;
+      if (bottom_of_object < -window.screen.height / 6) {
+        processAnimation(element, elementClass, animationClass)
+      }
+    }
+  }
+
+  function processAnimation(element, elementClass, animationClass) {
+    if (window.screen.width < 1000) {
+      element.classList.remove(elementClass);
+      return;
+    }
+    let delay = 0;
+    if (element.classList.contains("home-animation-delay-1")) {
+      delay = 100;
+    } else if (element.classList.contains("home-animation-delay-2")) {
+      delay = 300;
+    } else if (element.classList.contains("home-animation-delay-3")) {
+      delay = 500;
+    }
+    setTimeout(function() {
+      element.classList.remove(elementClass);
+      element.classList.add(animationClass);
+      setTimeout(function () {
+        element.classList.remove(animationClass);
+      }, 1500);
+    }, delay);
+  }
+
+  document.addEventListener('scroll', function() {
+    const arrow = document.getElementById("home-scroll-arrow");
+    if (window.scrollY > 50) {
+      arrow.classList.add("home-scroll-arrow-hidden");
+    } else {
+      arrow.classList.remove("home-scroll-arrow-hidden");
+    }
+    const header = document.getElementById("navbar");
+    const scrollUp = document.getElementById("home-scroll-up");
+    if (window.scrollY > 0) {
+      header.classList.remove("navbar-static");
+      scrollUp.classList.add("home-scroll-up-visible");
+    } else {
+      header.classList.add("navbar-static");
+      scrollUp.classList.remove("home-scroll-up-visible");
+    }
+  });
+
+  document.getElementById("home-scroll-arrow").addEventListener("click", function() {
+    window.scrollTo({top: window.innerHeight, behavior: "smooth"});
+  });
+
+  document.getElementById("home-scroll-up").addEventListener("click", function() {
+    window.scrollTo({top: 0, behavior: "smooth"});
+  });
+
+  let quill = new Quill('#home-contact-message', {
+    modules: {
+      toolbar: [
+        [{'size': ['huge', 'large', false, 'small']}],
+        ['bold', 'italic', 'underline'],
+        ['image'],
+        [{'list': 'ordered'}, {'list': 'bullet'}],
+        [{'align': []}],
+        [{'color': []}],
+      ]
+    },
+    theme: 'snow'
+  });
+
+  document.getElementById("home-contact-email").oninput = function(event) {
+    checkQuestionCreatable();
+  }
+
+  document.getElementById("home-contact-title").oninput = function(event) {
+    checkQuestionCreatable();
+  }
+
+  quill.on('text-change', function(delta, oldDelta, source) {
+    checkQuestionCreatable();
+  });
+
+  function checkQuestionCreatable() {
+    if (document.getElementById("home-contact-email").value !== "" &&
+      document.getElementById("home-contact-title").value !== "" &&
+      document.getElementsByClassName("ql-editor")[0].innerHTML !== "<p><br></p>"
+    ) {
+      document.getElementById("home-contact-create").classList.remove("disabled");
+    } else {
+      document.getElementById("home-contact-create").classList.add("disabled");
+    }
+  }
+
+  document.getElementById("home-contact-create").onclick = function(event) {
+    let email = document.getElementById("home-contact-email").value;
+    let title = document.getElementById("home-contact-title").value;
+    let message =  document.getElementsByClassName("ql-editor")[0].innerHTML;
+    let request = new HttpRequest("/question/create/", "POST",
+      [], {email: email, title: title, question: message});
+    request.send(function (status, responseText) {
+      if (status !== 200) {
+        Swal.fire("{% trans 'home.contact.create.limit.title' %}", "{% trans 'home.contact.create.limit.body' %}", "error");
+        return;
+      }
+      let success = JSON.parse(responseText).success;
+      if (!success) {
+        Swal.fire("{% trans 'home.contact.create.failed.title' %}", "{% trans 'home.contact.create.failed.body' %}", "error");
+        return;
+      }
+      Swal.fire("{% trans 'home.contact.create.successful.title' %}", "{% trans 'home.contact.create.successful.body' %}", "success").then(success => window.location.href = "/");
+    });
+  }
+</script>

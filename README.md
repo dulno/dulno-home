@@ -9,10 +9,10 @@ This project implements the homepage of Dulno. This includes general information
 
 ## Status
 
-|      | Pipeline status                                                     |
-|------|---------------------------------------------------------------------|
-| main | ![](https://git.dulno.com/dulno/dulno-web/badges/main/pipeline.svg) |
-| dev  | ![](https://git.dulno.com/dulno/dulno-web/badges/dev/pipeline.svg)  |
+|      | Pipeline status                                                       |
+|------|-----------------------------------------------------------------------|
+| main | ![](https://git.dulno.com/dulno/dulno-home/badges/main/pipeline.svg)  |
+| dev  | ![](https://git.dulno.com/dulno/dulno-home/badges/dev/pipeline.svg)   |
 
 ## Installation
 
