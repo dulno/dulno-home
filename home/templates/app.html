@@ -1,0 +1,20 @@
+<script>
+  const deepLink = `dulno://app`;
+
+  //TODO: FILL STORE URLS
+  const playStoreUrl = "";
+  const appStoreUrl = "";
+
+  window.location.href = deepLink;
+
+  setTimeout(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    if (/android/i.test(userAgent)) {
+      window.location.href = playStoreUrl;
+    } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+      window.location.href = appStoreUrl;
+    } else {
+      window.location.href = "/";
+    }
+  }, 1000);
+</script>
