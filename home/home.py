@@ -27,6 +27,10 @@ async def home(request):
     'isNavbarStatic': True})
 
 @home_page
+async def app(request):
+  return render(request, 'app.html', {'title': '', 'css': []})
+
+@home_page
 async def imprint(request):
   return render(request, 'imprint.html', {'title': gettext("imprint.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
