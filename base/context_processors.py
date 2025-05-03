@@ -1,7 +1,7 @@
 from app.settings import ENVIRONMENT
 
 def domain(request):
-  if ENVIRONMENT == 'PRODUCTIVE':
+  if ENVIRONMENT == 'PRODUCTION':
     domain = 'dulno.com'
     base_url = 'https://dulno.com'
     request_prefix = 'https://api.dulno.com/v1'
