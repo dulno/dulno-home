@@ -58,6 +58,10 @@
   }
 
   document.getElementById("home-footer-contact").addEventListener("click", function(event) {
-    window.location.href = "{% if request.path != '/' and request.path != '/home/' %}/{% endif %}#contact";
+    if (window.location.pathname !== '/' && window.location.pathname !== '/home/') {
+      window.location.href = '/#contact';
+    } else {
+      window.location.href = '#contact';
+    }
   });
 </script>
