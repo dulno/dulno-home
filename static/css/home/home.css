@@ -409,11 +409,11 @@ div:not(#pricing) > p {
 }
 
 @keyframes stamp-drop {
-  0%   { top: -60px; opacity: 0.4; }
-  30%  { top: 0; opacity: 1; }
-  40%  { top: 0; opacity: 1; }
-  50%  { top: -60px; opacity: 0.4; }
-  100% { top: -60px; opacity: 0.4; }
+  0%   { top: -60px; opacity: 0.4; width: 160px; }
+  30%  { top: 0; opacity: 1; width: 175px; }
+  40%  { top: 0; opacity: 1; width: 175px; }
+  50%  { top: -60px; opacity: 0.4; width: 160px; }
+  100% { top: -60px; opacity: 0.4; width: 160px; }
 }
 
 .home-functionality-steps {
