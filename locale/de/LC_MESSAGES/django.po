@@ -3,6 +3,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+# ERROR
+msgid "error.404.title"
+msgstr "404 - Dulno"
+msgid "error.404.headline"
+msgstr "Fehler - 404"
+msgid "error.404.description"
+msgstr "Entschuldigung, die Seite konnte nicht gefunden werden. Klicken Sie auf das Logo, um zurück zur Homepage zu gelangen."
+
 # POPUP
 msgid "popup.cancel"
 msgstr "Abbrechen"
