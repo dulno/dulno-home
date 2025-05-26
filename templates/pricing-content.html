@@ -36,6 +36,7 @@
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.balances' %}</b></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.coupons' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.campaigns' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.notifications' %}</b></li>
       </ul>
@@ -54,6 +55,7 @@
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.value.card' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.analysis' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.balances' %}</p></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.coupons' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.campaigns' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.notifications' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.member.card' %}</b></li>
@@ -110,6 +112,7 @@
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.balances' %}</b></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.coupons' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.campaigns' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.notifications' %}</b></li>
             </ul>
@@ -136,6 +139,7 @@
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.value.card' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.analysis' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.balances' %}</p></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.coupons' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.campaigns' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.notifications' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.member.card' %}</b></li>
@@ -205,6 +209,7 @@
     displayPackageCell("pricing-value-card-", packageName, packageData.valueCardAccess);
     displayPackageCell("pricing-member-card-", packageName, packageData.memberCardAccess);
     displayPackageCell("pricing-analysis-", packageName, packageData.analysisAccess);
+    displayPackageCell("pricing-coupon-", packageName, packageData.couponAccess);
     displayPackageCell("pricing-campaign-", packageName, packageData.campaignAccess);
     displayPackageCell("pricing-notification-", packageName, packageData.notificationAccess);
     displayPackageCell("pricing-portal-", packageName, packageData.portalAccess);
