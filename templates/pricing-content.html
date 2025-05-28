@@ -19,7 +19,7 @@
       <button type="button" class="pricing-package-basic-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
       <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
       <ul class="pricing-package-features">
-        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-basic mb-0"></b></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-basic mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.collection.card' %}</b></li>
       </ul>
     </th>
@@ -33,7 +33,7 @@
       <button type="button" class="pricing-package-professional-buy pricing-get-button btn btn-primary">{% trans 'pricing.buy' %}</button>
       <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
       <ul class="pricing-package-features">
-        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="pricing-location-number-professional mb-0"></p></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-professional mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</b></li>
@@ -52,7 +52,7 @@
       <button type="button" class="pricing-package-premium-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
       <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
       <ul class="pricing-package-features">
-        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-premium mb-0"></b></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-premium mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.locations' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.value.card' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</p></li>
@@ -88,7 +88,7 @@
             <button type="button" class="pricing-package-basic-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
             <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
             <ul class="pricing-package-features">
-              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-basic mb-0"></b></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-basic mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.collection.card' %}</b></li>
             </ul>
           </th>
@@ -110,7 +110,7 @@
             <button type="button" class="pricing-package-professional-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
             <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
             <ul class="pricing-package-features">
-              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="pricing-location-number-professional mb-0"></p></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-professional mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</b></li>
@@ -137,7 +137,7 @@
             <button type="button" class="pricing-package-premium-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
             <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
             <ul class="pricing-package-features">
-              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-premium mb-0"></b></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-premium mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.locations' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.value.card' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</p></li>
@@ -203,11 +203,10 @@
     if (packageName !== "enterprise") {
       let language = Cookie.find("dulno-home-language");
       displayPackageCell("pricing-price-", packageName, (language === "de" ?
-        packageData.price.toString().replaceAll(".", ",") : packageData.price) + " €");
+        packageData.price.toString().replaceAll(".", ",") : packageData.price), "€");
     }
-    displayPackageCell("pricing-location-number-", packageName, packageData.locationNumber,
-      packageData.locationNumber > 1 ? "{% trans 'pricing.feature.locations' %}" :
-        "{% trans 'pricing.feature.location' %}");
+    displayPackageCell("pricing-location-number-", packageName,
+      packageData.locationLimit);
   }
 
   function displayPackageCell(packageCellId, packageName, value, suffix) {
