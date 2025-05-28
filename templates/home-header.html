@@ -27,3 +27,17 @@
   </div>
 </nav>
 <div id="header-space"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.getElementById('navbar-content');
+    document.querySelectorAll('.nav-link[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (navbarToggler.offsetParent !== null && navbarCollapse.classList.contains('show')) {
+          navbarToggler.click();
+        }
+      });
+    });
+  });
+</script>
