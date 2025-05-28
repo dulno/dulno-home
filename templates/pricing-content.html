@@ -33,7 +33,7 @@
       <button type="button" class="pricing-package-professional-buy pricing-get-button btn btn-primary">{% trans 'pricing.buy' %}</button>
       <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
       <ul class="pricing-package-features">
-        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-professional mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
+        <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="pricing-location-number-professional mb-0 me-2"></p><p class="mb-0">{% trans 'pricing.feature.location' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
         <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</b></li>
@@ -110,7 +110,7 @@
             <button type="button" class="pricing-package-professional-buy pricing-get-button btn btn-outline-dark">{% trans 'pricing.buy' %}</button>
             <p class="pricing-package-features-headline">{% trans 'pricing.summary.headline' %}</p>
             <ul class="pricing-package-features">
-              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="pricing-location-number-professional mb-0 me-2"></b><b class="mb-0">{% trans 'pricing.feature.location' %}</b></li>
+              <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="pricing-location-number-professional mb-0 me-2"></p><p class="mb-0">{% trans 'pricing.feature.location' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><p class="mb-0">{% trans 'pricing.feature.collection.card' %}</p></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.value.card' %}</b></li>
               <li class="mb-3"><i class="fa-solid fa-check me-3"></i><b class="mb-0">{% trans 'pricing.feature.analysis' %} & {% trans 'pricing.feature.balances' %}</b></li>
@@ -160,6 +160,10 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+</div>
+<div class="text-center mt-5 pt-5 home-animation-opacity home-animation-delay-3">
+  <span>{% trans 'pricing.sales.description' %}</span><br>
+  <button id="pricing-sales-link" type="button" class="btn btn-link">{% trans 'pricing.sales.link' %}</button>
 </div>
 
 <script>
@@ -274,5 +278,9 @@
 
   function preparePurchase(package, price) {
     window.location.href = "https://portal." + "{{domain}}" + "/signup/";
+  }
+
+  document.getElementById("pricing-sales-link").onclick = function (event) {
+    window.location.href = "https://portal." + "{{domain}}" + "/sale/";
   }
 </script>

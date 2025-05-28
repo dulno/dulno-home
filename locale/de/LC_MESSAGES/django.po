@@ -244,6 +244,10 @@ msgid "pricing.feature.management"
 msgstr "Verwaltung"
 msgid "pricing.feature.portal"
 msgstr "Kundenportal"
+msgid "pricing.sales.description"
+msgstr "Haben Sie Fragen oder einen besonderen Wunsch?"
+msgid "pricing.sales.link"
+msgstr "Kontaktieren Sie unser Verkaufsteam."
 
 # IMPRINT
 msgid "imprint.title"
