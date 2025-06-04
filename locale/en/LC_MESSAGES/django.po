@@ -58,8 +58,6 @@ msgstr "Terms of service"
 # HOME
 msgid "home.title"
 msgstr "Dulno"
-msgid "home.headline"
-msgstr "Home"
 msgid "home.slogan"
 msgstr "Your digital stamp card"
 msgid "home.description.1"
