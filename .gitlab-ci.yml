@@ -21,11 +21,15 @@ build_staging:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
   script:
-    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
-    - docker build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" -t $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test .
-    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" -t $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
-    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - docker build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" -t $DOCKER_IMAGE:test .
+    - docker save $DOCKER_IMAGE:test -o $DOCKER_IMAGE.tar
+    - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" --output type=docker -t $DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
+    - docker save $DOCKER_PROXY_IMAGE:test -o $DOCKER_PROXY_IMAGE.tar
+  artifacts:
+    paths:
+      - $DOCKER_IMAGE.tar
+      - $DOCKER_PROXY_IMAGE.tar
+    expire_in: 1 hour
   only:
     - dev
 
@@ -56,17 +60,14 @@ scan_staging:
     - build_staging
   variables:
     GIT_STRATEGY: none
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
-    TRIVY_USERNAME: $STAGING_DOCKER_USERNAME
-    TRIVY_PASSWORD: $STAGING_DOCKER_PASSWORD
   script:
     - trivy --version
     - time trivy clean --scan-cache
     - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - docker load -i $DOCKER_IMAGE.tar
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $DOCKER_IMAGE:test
+    - docker load -i $DOCKER_PROXY_IMAGE.tar
+    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $DOCKER_PROXY_IMAGE:test
   cache:
     paths:
       - .trivycache/
@@ -105,18 +106,18 @@ publish_staging:
   services:
     - docker:dind
   dependencies:
-    - scan_staging
+    - build_staging
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
   script:
     - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
-    - docker pull $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - docker tag $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
+    - docker load -i $DOCKER_IMAGE.tar
+    - docker tag $DOCKER_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
     - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
-    - docker pull $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
-    - docker tag $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+    - docker load -i $DOCKER_PROXY_IMAGE.tar
+    - docker tag $DOCKER_PROXY_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
     - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
   only:
     - dev
