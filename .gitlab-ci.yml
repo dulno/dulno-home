@@ -21,6 +21,7 @@ build_staging:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
   script:
+    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
     - docker build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" -t $DOCKER_IMAGE:test .
     - docker save $DOCKER_IMAGE:test -o $DOCKER_IMAGE.tar
     - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" --output type=docker -t $DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
