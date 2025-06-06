@@ -14,7 +14,7 @@ variables:
 build_staging:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:latest
+    name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   before_script:
     - echo "{\"auths\":{\"$STAGING_DOCKER_REGISTRY\":{\"username\":\"$STAGING_DOCKER_USERNAME\",\"password\":\"$STAGING_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
