@@ -29,6 +29,7 @@ WORKDIR /app
 COPY --from=builder /dulno/. /app/
 
 RUN ls -R .
+RUN ls -R dulno/
 
 RUN python dulno/manage.py compilemessages
 
