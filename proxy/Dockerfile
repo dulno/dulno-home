@@ -29,6 +29,6 @@ COPY --from=builder /dulno/static /dulno/static/
 COPY proxy/nginx.conf /etc/nginx/nginx.conf
 COPY proxy/proxy /etc/nginx/sites-available/proxy
 RUN mkdir -p /etc/nginx/sites-enabled
-RUN ln -sf /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
+RUN cp /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
 
 CMD ["/bin/sh", "-c", "envsubst '$SERVER_NAME' < /etc/nginx/sites-available/proxy > /tmp/proxy && mv /tmp/proxy /etc/nginx/sites-available/proxy && exec nginx -g 'daemon off;'"]

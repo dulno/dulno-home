@@ -29,7 +29,7 @@ build_staging:
         --no-push
     - |
       /kaniko/executor \
-        --context "$CI_PROJECT_DIR/proxy" \
+        --context "$CI_PROJECT_DIR" \
         --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
         --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
         --build-arg SERVER_NAME="10.96.0.15" \
