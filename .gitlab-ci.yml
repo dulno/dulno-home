@@ -13,19 +13,27 @@ variables:
 
 build_staging:
   stage: build
-  image: docker:cli
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
+  image:
+    name: gcr.io/kaniko-project/executor:latest
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$STAGING_DOCKER_REGISTRY\":{\"username\":\"$STAGING_DOCKER_USERNAME\",\"password\":\"$STAGING_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
   script:
-    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
-    - docker build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" -t $DOCKER_IMAGE:test .
-    - docker save $DOCKER_IMAGE:test -o $DOCKER_IMAGE.tar
-    - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" --output type=docker -t $DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
-    - docker save $DOCKER_PROXY_IMAGE:test -o $DOCKER_PROXY_IMAGE.tar
+    - /kaniko/executor \
+      --context "$CI_PROJECT_DIR" \
+      --dockerfile "$CI_PROJECT_DIR/Dockerfile" \
+      --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
+      --destination "$DOCKER_IMAGE:test" \
+      --tarPath "$DOCKER_IMAGE.tar" \
+      --no-push
+    - /kaniko/executor \
+      --context "$CI_PROJECT_DIR/proxy" \
+      --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
+      --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
+      --build-arg SERVER_NAME="10.96.0.15" \
+      --destination "$DOCKER_PROXY_IMAGE:test" \
+      --tarPath "$DOCKER_PROXY_IMAGE.tar" \
+      --no-push
   cache:
     key: "build_staging-${CI_COMMIT_REF_SLUG}"
     paths:
@@ -63,20 +71,15 @@ scan_staging:
   variables:
     GIT_STRATEGY: none
   script:
-    - time trivy clean --scan-cache
-    - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
-    - trivy image --input $DOCKER_IMAGE.tar --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
-    - trivy image --input $DOCKER_PROXY_IMAGE.tar --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+    - time trivy image --download-db-only --no-progress
+    - trivy image --input "$DOCKER_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
+    - trivy image --input "$DOCKER_PROXY_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
   cache:
     - key: "build_staging-${CI_COMMIT_REF_SLUG}"
       paths:
         - $DOCKER_IMAGE.tar
         - $DOCKER_PROXY_IMAGE.tar
       policy: pull
-    - key: "trivy-${CI_COMMIT_REF_SLUG}"
-      paths:
-        - .trivycache/
-      policy: pull-push
   only:
     - dev
 
@@ -108,23 +111,20 @@ scan_production:
 
 publish_staging:
   stage: publish
-  image: docker:cli
-  services:
-    - docker:dind
+  image:
+    name: quay.io/skopeo/stable:latest
+    entrypoint: [""]
   dependencies:
     - build_staging
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
+  before_script:
+    - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
-    - echo $STAGING_DOCKER_PASSWORD | docker login -u $STAGING_DOCKER_USERNAME --password-stdin $STAGING_DOCKER_REGISTRY
-    - docker load -i $DOCKER_IMAGE.tar
-    - docker tag $DOCKER_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
-    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
-    - docker load -i $DOCKER_PROXY_IMAGE.tar
-    - docker tag $DOCKER_PROXY_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
-    - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+    - skopeo copy \
+      --src docker-archive:${DOCKER_IMAGE}.tar \
+      --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest \
+    - skopeo copy \
+      --src docker-archive:${DOCKER_PROXY_IMAGE}.tar \
+      --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest \
   cache:
     - key: "build_staging-${CI_COMMIT_REF_SLUG}"
       paths:
