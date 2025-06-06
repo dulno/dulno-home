@@ -1,15 +1,15 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
-RUN mkdir -p /home/dulno/home
-RUN ln -s /obfuscation /home/dulno/home
+RUN mkdir -p /dulno
+RUN cp -a /obfuscation /dulno/
 
-COPY static /home/dulno/home/static
-COPY obfuscation /home/dulno/home/obfuscation
+COPY static /dulno/static
+COPY obfuscation /dulno/obfuscation
 
-ENV OBFUSCATION_HOME=/home/dulno/home
+ENV OBFUSCATION_HOME=/dulno
 
-RUN node /home/dulno/home/obfuscation/obfuscate.js
+RUN node /dulno/obfuscation/obfuscate.js
 
 FROM nginx:latest
 
@@ -24,7 +24,7 @@ RUN apt-get update && \
         libavif15=0.11.1-1+deb12u1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /home/dulno/home/static /home/dulno/home/static/
+COPY --from=builder /dulno/static /dulno/static/
 
 COPY proxy/nginx.conf /etc/nginx/nginx.conf
 COPY proxy/proxy /etc/nginx/sites-available/proxy
