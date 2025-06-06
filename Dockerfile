@@ -24,9 +24,9 @@ RUN apt-get update && \
 
 RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
 
-COPY --from=builder /dulno /app
-
 WORKDIR /app
+
+COPY --from=builder /dulno .
 
 RUN django-admin compilemessages
 
