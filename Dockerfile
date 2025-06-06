@@ -4,13 +4,14 @@ FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 RUN mkdir -p /dulno && cp -a /obfuscation /dulno/
 
 COPY manage.py /dulno
-COPY templates /dulno
-COPY locale /dulno
-COPY home /dulno
-COPY errors /dulno
-COPY base /dulno
-COPY app /dulno
-WORKDIR /dulno
+COPY templates /dulno/
+COPY obfuscation /dulno/
+COPY locale /dulno/
+COPY home /dulno/
+COPY errors /dulno/
+COPY base /dulno/
+COPY app /dulno/
+WORKDIR /dulno/
 
 ENV OBFUSCATION_HOME=/dulno
 
