@@ -19,21 +19,23 @@ build_staging:
   before_script:
     - echo "{\"auths\":{\"$STAGING_DOCKER_REGISTRY\":{\"username\":\"$STAGING_DOCKER_USERNAME\",\"password\":\"$STAGING_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
   script:
-    - /kaniko/executor \
-      --context "$CI_PROJECT_DIR" \
-      --dockerfile "$CI_PROJECT_DIR/Dockerfile" \
-      --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
-      --destination "$DOCKER_IMAGE:test" \
-      --tarPath "$DOCKER_IMAGE.tar" \
-      --no-push
-    - /kaniko/executor \
-      --context "$CI_PROJECT_DIR/proxy" \
-      --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
-      --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
-      --build-arg SERVER_NAME="10.96.0.15" \
-      --destination "$DOCKER_PROXY_IMAGE:test" \
-      --tarPath "$DOCKER_PROXY_IMAGE.tar" \
-      --no-push
+    - |
+      /kaniko/executor \
+        --context "$CI_PROJECT_DIR" \
+        --dockerfile "$CI_PROJECT_DIR/Dockerfile" \
+        --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
+        --destination "$DOCKER_IMAGE:test" \
+        --tarPath "$DOCKER_IMAGE.tar" \
+        --no-push
+    - |
+      /kaniko/executor \
+        --context "$CI_PROJECT_DIR/proxy" \
+        --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
+        --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
+        --build-arg SERVER_NAME="10.96.0.15" \
+        --destination "$DOCKER_PROXY_IMAGE:test" \
+        --tarPath "$DOCKER_PROXY_IMAGE.tar" \
+        --no-push
   cache:
     key: "build_staging-${CI_COMMIT_REF_SLUG}"
     paths:
@@ -119,12 +121,14 @@ publish_staging:
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
-    - skopeo copy \
-      --src docker-archive:${DOCKER_IMAGE}.tar \
-      --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest \
-    - skopeo copy \
-      --src docker-archive:${DOCKER_PROXY_IMAGE}.tar \
-      --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest \
+    - |
+      skopeo copy \
+        --src docker-archive:${DOCKER_IMAGE}.tar \
+        --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+    - |
+      skopeo copy \
+        --src docker-archive:${DOCKER_PROXY_IMAGE}.tar \
+        --dest docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest
   cache:
     - key: "build_staging-${CI_COMMIT_REF_SLUG}"
       paths:
