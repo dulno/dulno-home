@@ -26,11 +26,12 @@ build_staging:
     - docker save $DOCKER_IMAGE:test -o $DOCKER_IMAGE.tar
     - docker buildx build --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" --build-arg SERVER_NAME="10.96.0.15" --output type=docker -t $DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
     - docker save $DOCKER_PROXY_IMAGE:test -o $DOCKER_PROXY_IMAGE.tar
-  artifacts:
+  cache:
+    key: "${CI_JOB_NAME}-${CI_COMMIT_REF_SLUG}"
     paths:
       - $DOCKER_IMAGE.tar
       - $DOCKER_PROXY_IMAGE.tar
-    expire_in: 1 hour
+    policy: push
   only:
     - dev
 
@@ -62,7 +63,6 @@ scan_staging:
   variables:
     GIT_STRATEGY: none
   script:
-    - trivy --version
     - time trivy clean --scan-cache
     - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
     - docker load -i $DOCKER_IMAGE.tar
@@ -70,8 +70,15 @@ scan_staging:
     - docker load -i $DOCKER_PROXY_IMAGE.tar
     - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $DOCKER_PROXY_IMAGE:test
   cache:
-    paths:
-      - .trivycache/
+    - key: "build_staging-${CI_COMMIT_REF_SLUG}"
+      paths:
+        - $DOCKER_IMAGE.tar
+        - $DOCKER_PROXY_IMAGE.tar
+      policy: pull
+    - key: "trivy-${CI_COMMIT_REF_SLUG}"
+      paths:
+        - .trivycache/
+      policy: pull-push
   only:
     - dev
 
@@ -107,7 +114,7 @@ publish_staging:
   services:
     - docker:dind
   dependencies:
-    - build_staging
+    - scan_staging
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_TLS_CERTDIR: ""
@@ -120,6 +127,12 @@ publish_staging:
     - docker load -i $DOCKER_PROXY_IMAGE.tar
     - docker tag $DOCKER_PROXY_IMAGE:test $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
     - docker push $STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+  cache:
+    key: "${build_staging}-${CI_COMMIT_REF_SLUG}"
+    paths:
+      - $DOCKER_IMAGE.tar
+      - $DOCKER_PROXY_IMAGE.tar
+    policy: pull
   only:
     - dev
 
