@@ -1,7 +1,7 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
-RUN ln -s /obfuscation /dulno
+RUN mkdir -p /dulno
 
 COPY . /dulno
 
@@ -20,9 +20,15 @@ RUN apt-get update && \
         gettext \
         linux-libc-dev \
         curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
+RUN pip install --no-cache-dir \
+        django \
+        gunicorn \
+        django-cors-headers \
+        requests \
+        jwt
 
 COPY --from=builder /dulno /dulno
 
