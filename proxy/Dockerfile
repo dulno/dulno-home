@@ -17,8 +17,11 @@ ARG SERVER_NAME
 ENV SERVER_NAME=${SERVER_NAME}
 
 # Fix CVE-2024-56406: Update perl-base
+# Fix CVE-2025-48174: Update libavif15
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends perl-base=5.36.0-7+deb12u2 && \
+    apt-get install -y --no-install-recommends \
+        perl-base=5.36.0-7+deb12u2 \
+        libavif15=0.11.1-1+deb12u1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /home/dulno/home/static /home/dulno/home/static/
