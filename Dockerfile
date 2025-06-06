@@ -1,7 +1,10 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
-RUN ln -s /obfuscation /dulno
+RUN mkdir -p /dulno
+
+RUN ls -R .
+RUN ls -R dulno
 
 COPY . /dulno
 
@@ -24,13 +27,10 @@ RUN apt-get update && \
 
 RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
 
-WORKDIR /app
+COPY --from=builder /dulno /dulno
 
-COPY --from=builder /dulno/. /app/
+WORKDIR /dulno
 
-RUN ls -R .
-RUN ls -R dulno/
+RUN django-admin compilemessages
 
-RUN python dulno/manage.py compilemessages
-
-ENTRYPOINT ["gunicorn", "--config", "dulno/app/gunicorn-config.py", "app.wsgi"]
+ENTRYPOINT ["gunicorn", "--config", "app/gunicorn-config.py", "app.wsgi"]
