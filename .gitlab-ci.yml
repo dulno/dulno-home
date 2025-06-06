@@ -62,18 +62,11 @@ scan_staging:
     - build_staging
   variables:
     GIT_STRATEGY: none
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
-    TRIVY_USERNAME: $STAGING_DOCKER_USERNAME
-    TRIVY_PASSWORD: $STAGING_DOCKER_PASSWORD
   script:
     - time trivy clean --scan-cache
     - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
-    - docker load -i $DOCKER_IMAGE.tar
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $DOCKER_IMAGE:test
-    - docker load -i $DOCKER_PROXY_IMAGE.tar
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $DOCKER_PROXY_IMAGE:test
+    - trivy image --input $DOCKER_IMAGE.tar --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+    - trivy image --input $DOCKER_PROXY_IMAGE.tar --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
   cache:
     - key: "build_staging-${CI_COMMIT_REF_SLUG}"
       paths:
