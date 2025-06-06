@@ -26,7 +26,7 @@ RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
 
 WORKDIR /app
 
-COPY --from=builder /dulno .
+COPY --from=builder /dulno/ /app
 
 RUN ls -R .
 
