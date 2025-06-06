@@ -3,9 +3,6 @@ FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
 
 RUN mkdir -p /dulno
 
-RUN ls -R .
-RUN ls -R dulno
-
 COPY . /dulno
 
 WORKDIR /dulno
