@@ -26,10 +26,10 @@ RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
 
 WORKDIR /app
 
-COPY --from=builder /dulno/dulno/. /app/
+COPY --from=builder /dulno/. /app/
 
 RUN ls -R .
 
-RUN python manage.py compilemessages
+RUN python dulno/manage.py compilemessages
 
-ENTRYPOINT ["gunicorn", "--config", "app/gunicorn-config.py", "app.wsgi"]
+ENTRYPOINT ["gunicorn", "--config", "dulno/app/gunicorn-config.py", "app.wsgi"]
