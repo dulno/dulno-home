@@ -28,6 +28,9 @@ WORKDIR /app
 
 COPY --from=builder /dulno .
 
+RUN ls -R /dulno
+RUN ls -R .
+
 RUN python manage.py compilemessages
 
 ENTRYPOINT ["gunicorn", "--config", "app/gunicorn-config.py", "app.wsgi"]
