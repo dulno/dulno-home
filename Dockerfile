@@ -28,6 +28,6 @@ WORKDIR /app
 
 COPY --from=builder /dulno .
 
-RUN django-admin compilemessages
+RUN python manage.py compilemessages
 
 ENTRYPOINT ["gunicorn", "--config", "app/gunicorn-config.py", "app.wsgi"]
