@@ -11,7 +11,7 @@ variables:
   KUBERNETES_RESOURCE: "deployment/dulno-home-deployment"
   KUBERNETES_PROXY_RESOURCE: "deployment/dulno-home-proxy-deployment"
 
-build_staging:
+build_base_staging:
   stage: build
   image:
     name: gcr.io/kaniko-project/executor:debug
@@ -27,6 +27,22 @@ build_staging:
         --destination "$DOCKER_IMAGE:test" \
         --tarPath "$DOCKER_IMAGE.tar" \
         --no-push
+  cache:
+    key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
+    paths:
+      - $DOCKER_IMAGE.tar
+    policy: push
+  only:
+    - dev
+
+build_proxy_staging:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$STAGING_DOCKER_REGISTRY\":{\"username\":\"$STAGING_DOCKER_USERNAME\",\"password\":\"$STAGING_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script:
     - |
       /kaniko/executor \
         --context "$CI_PROJECT_DIR" \
@@ -37,9 +53,8 @@ build_staging:
         --tarPath "$DOCKER_PROXY_IMAGE.tar" \
         --no-push
   cache:
-    key: "build_staging-${CI_COMMIT_REF_SLUG}"
+    key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
     paths:
-      - $DOCKER_IMAGE.tar
       - $DOCKER_PROXY_IMAGE.tar
     policy: push
   only:
@@ -69,7 +84,8 @@ scan_staging:
     name: aquasec/trivy:latest
     entrypoint: [""]
   dependencies:
-    - build_staging
+    - build_base_staging
+    - build_proxy_staging
   variables:
     GIT_STRATEGY: none
   script:
@@ -77,9 +93,12 @@ scan_staging:
     - trivy image --input "$DOCKER_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
     - trivy image --input "$DOCKER_PROXY_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
   cache:
-    - key: "build_staging-${CI_COMMIT_REF_SLUG}"
+    - key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
       paths:
         - $DOCKER_IMAGE.tar
+      policy: pull
+    - key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
+      paths:
         - $DOCKER_PROXY_IMAGE.tar
       policy: pull
   only:
@@ -111,13 +130,13 @@ scan_production:
   only:
     - main
 
-publish_staging:
+publish_base_staging:
   stage: publish
   image:
     name: quay.io/skopeo/stable:latest
     entrypoint: [""]
   dependencies:
-    - build_staging
+    - build_base_staging
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
@@ -125,14 +144,31 @@ publish_staging:
       skopeo copy \
         docker-archive:${DOCKER_IMAGE}.tar \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+  cache:
+    - key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
+      paths:
+        - $DOCKER_IMAGE.tar
+      policy: pull
+  only:
+    - dev
+
+publish_proxy_staging:
+  stage: publish
+  image:
+    name: quay.io/skopeo/stable:latest
+    entrypoint: [""]
+  dependencies:
+    - build_proxy_staging
+  before_script:
+    - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
+  script:
     - |
       skopeo copy \
         docker-archive:${DOCKER_PROXY_IMAGE}.tar \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest
   cache:
-    - key: "build_staging-${CI_COMMIT_REF_SLUG}"
+    - key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
       paths:
-        - $DOCKER_IMAGE.tar
         - $DOCKER_PROXY_IMAGE.tar
       policy: pull
   only:
@@ -165,8 +201,6 @@ deploy_staging:
   image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
-  dependencies:
-    - publish_staging
   before_script:
     - mkdir -p ~/.kube
     - echo "$STAGING_KUBERNETES_CONFIGURATION" > ~/.kube/config
