@@ -10,6 +10,9 @@ variables:
   DOCKER_PROXY_IMAGE: "dulno-home-proxy"
   KUBERNETES_RESOURCE: "deployment/dulno-home-deployment"
   KUBERNETES_PROXY_RESOURCE: "deployment/dulno-home-proxy-deployment"
+  FF_USE_FASTZIP: "true"
+  ARTIFACT_COMPRESSION_LEVEL: "fastest"
+  CACHE_COMPRESSION_LEVEL: "fastest"
 
 build_base_staging:
   stage: build
