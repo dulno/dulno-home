@@ -111,9 +111,16 @@ scan_infrastructure:
 
 scan_dependency:
   stage: test
-  image: owasp/dependency-check
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
   script:
-    - dependency-check.sh --scan "$CI_PROJECT_DIR" --format ALL
+    - trivy fs --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy fs "$CI_PROJECT_DIR" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+  cache:
+    key: trivy-cache
+    paths:
+      - .trivycache/
   allow_failure: false
 
 scan_container_staging:
