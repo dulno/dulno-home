@@ -83,6 +83,22 @@ build_proxy_production:
   only:
     - main
 
+scan_secret:
+  stage: scan
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --redact --platform=gitlab --log-opts="-p -n 1"
+  allow_failure: false
+
+scan_code:
+  stage: scan
+  image: semgrep/semgrep:latest
+  script:
+    - semgrep --config=p/ci --error $CI_PROJECT_DIR
+  allow_failure: false
+
 scan_container_staging:
   stage: scan
   image:
@@ -103,23 +119,7 @@ scan_container_staging:
   only:
     - dev
 
-scan_secret:
-  stage: scan
-  image:
-    name: zricethezav/gitleaks:latest
-    entrypoint: [""]
-  script:
-    - gitleaks detect --source . --redact --platform=gitlab --log-opts="-p -n 1"
-  allow_failure: false
-
-scan_code:
-  stage: scan
-  image: semgrep/semgrep:latest
-  script:
-    - semgrep --config=p/ci --error $CI_PROJECT_DIR
-  allow_failure: false
-
-scan_production:
+scan_container_production:
   stage: scan
   image:
     name: aquasec/trivy:latest
