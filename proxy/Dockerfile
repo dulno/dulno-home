@@ -1,34 +1,26 @@
 ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
+FROM ${DOCKER_REGISTRY}/dulno-web-obfuscation:latest AS builder
 
-RUN mkdir -p /home/dulno/home
-RUN ln -s /obfuscation /home/dulno/home
+COPY /static/js/ /dulno/static/js/
+COPY /obfuscation/ /dulno/obfuscation/
 
-COPY static /home/dulno/home/static
-COPY obfuscation /home/dulno/home/obfuscation
+ENV OBFUSCATION_HOME=/dulno
 
-ENV OBFUSCATION_HOME=/home/dulno/home
+RUN node /dulno/obfuscation/obfuscate.js
 
-RUN node /home/dulno/home/obfuscation/obfuscate.js
-
-FROM nginx:latest
+FROM ${DOCKER_REGISTRY}/dulno-web-proxy:latest
 
 ARG SERVER_NAME
 ENV SERVER_NAME=${SERVER_NAME}
 
-# Fix CVE-2024-56406: Update perl-base
-# Fix CVE-2025-48174: Update libavif15
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        perl-base=5.36.0-7+deb12u2 \
-        libavif15=0.11.1-1+deb12u1 && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+COPY /static/css/ /dulno/static/css/
+COPY /static/img/ /dulno/static/img/
+COPY /static/dependency/ /dulno/static/dependency/
+COPY --from=builder /dulno/static/js/ /dulno/static/js/
 
-COPY --from=builder /home/dulno/home/static /home/dulno/home/static/
-
-COPY proxy/nginx.conf /etc/nginx/nginx.conf
-COPY proxy/proxy /etc/nginx/sites-available/proxy
 RUN mkdir -p /etc/nginx/sites-enabled
-RUN ln -sf /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
 
-CMD ["/bin/sh", "-c", "envsubst '$SERVER_NAME' < /etc/nginx/sites-available/proxy > /tmp/proxy && mv /tmp/proxy /etc/nginx/sites-available/proxy && exec nginx -g 'daemon off;'"]
+COPY /proxy/nginx.conf /etc/nginx/nginx.conf
+COPY /proxy/proxy /etc/nginx/sites-enabled/proxy
+
+CMD ["/bin/sh", "-c", "envsubst '$SERVER_NAME' < /etc/nginx/sites-enabled/proxy > /tmp/proxy && mv /tmp/proxy /etc/nginx/sites-enabled/proxy && exec nginx -g 'daemon off;'"]

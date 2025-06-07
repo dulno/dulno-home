@@ -1,30 +1,25 @@
 ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest AS builder
+FROM ${DOCKER_REGISTRY}/dulno-web-obfuscation:latest AS builder
 
-RUN ln -s /obfuscation /dulno
-
-COPY . /dulno
-
-WORKDIR /dulno
+COPY /templates/ /dulno/templates/
+COPY /home/ /dulno/home/
+COPY /errors/ /dulno/errors/
+COPY /base/ /dulno/base/
+COPY /obfuscation/ /dulno/obfuscation/
 
 ENV OBFUSCATION_HOME=/dulno
 
-RUN node obfuscation/obfuscate.js
+RUN node /dulno/obfuscation/obfuscate.js
 
-FROM python:3.13-slim
+FROM ${DOCKER_REGISTRY}/dulno-web-base:latest
 
-# Install dependencies & fix CVE-2024-56406 by updating perl-base
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        perl-base=5.36.0-7+deb12u2 \
-        gettext \
-        linux-libc-dev \
-        curl && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
-
-RUN pip install --no-cache-dir django gunicorn django-cors-headers requests jwt
-
-COPY --from=builder /dulno /dulno
+COPY manage.py /dulno/manage.py
+COPY /locale/ /dulno/locale/
+COPY /app/ /dulno/app/
+COPY --from=builder /dulno/templates/ /dulno/templates/
+COPY --from=builder /dulno/home/ /dulno/home/
+COPY --from=builder /dulno/errors/ /dulno/errors/
+COPY --from=builder /dulno/base/ /dulno/base/
 
 WORKDIR /dulno
 
