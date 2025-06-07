@@ -1,5 +1,4 @@
 stages:
-  - test
   - build
   - scan
   - publish
@@ -110,7 +109,7 @@ scan_infrastructure:
   allow_failure: false
 
 scan_dependency:
-  stage: test
+  stage: scan
   image:
     name: aquasec/trivy:latest
     entrypoint: [""]
