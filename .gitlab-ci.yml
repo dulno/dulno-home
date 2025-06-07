@@ -1,4 +1,5 @@
 stages:
+  - test
   - build
   - scan
   - publish
@@ -113,10 +114,14 @@ scan_secret:
   allow_failure: false
 
 scan_code:
-  stage: scan
+  stage: test
   image: semgrep/semgrep:latest
   script:
-    - semgrep --config=p/ci --verbose
+    - semgrep --config=p/ci --json > semgrep-report.json
+    - cat semgrep-report.json
+  artifacts:
+    paths:
+      - semgrep-report.json
   allow_failure: false
 
 scan_production:
