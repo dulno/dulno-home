@@ -95,18 +95,29 @@ scan_secret:
 
 scan_code:
   stage: scan
-  image: semgrep/semgrep:latest
+  image:
+    name: semgrep/semgrep:latest
+    entrypoint: [""]
   script:
     - semgrep --config=p/ci --error $CI_PROJECT_DIR
   allow_failure: false
 
 scan_infrastructure:
-  stage: test
+  stage: scan
   image:
     name: bridgecrew/checkov
     entrypoint: [""]
   script:
     - checkov -d $CI_PROJECT_DIR
+  allow_failure: false
+
+scan_dependency:
+  stage: test
+  image:
+    name: owasp/dependency-check
+    entrypoint: [""]
+  script:
+    - dependency-check.sh --scan $CI_PROJECT_DIR --format "ALL"
   allow_failure: false
 
 scan_container_staging:
