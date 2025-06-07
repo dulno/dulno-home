@@ -99,6 +99,7 @@ scan_container_staging:
     key: trivy-cache
     paths:
       - .trivycache/
+  allow_failure: false
   only:
     - dev
 
@@ -108,7 +109,16 @@ scan_secret_staging:
     name: zricethezav/gitleaks:latest
     entrypoint: [""]
   script:
-    - gitleaks detect --source . --commit HEAD --redact --platform=gitlab
+    - gitleaks detect --source . --redact --platform=gitlab --log-opts="-p -n 1"
+  allow_failure: false
+  only:
+    - dev
+
+scan_code_staging:
+  stage: scan
+  image: returntocorp/semgrep:latest
+  script:
+    - semgrep --config=p/ci --metrics
   allow_failure: false
   only:
     - dev
@@ -129,6 +139,7 @@ scan_production:
     key: trivy-cache
     paths:
       - .trivycache/
+  allow_failure: false
   only:
     - main
 
