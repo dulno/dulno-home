@@ -83,7 +83,7 @@ build_proxy_production:
   only:
     - main
 
-scan_staging:
+scan_container_staging:
   stage: scan
   image:
     name: aquasec/trivy:latest
@@ -99,6 +99,17 @@ scan_staging:
     key: trivy-cache
     paths:
       - .trivycache/
+  only:
+    - dev
+
+scan_secret_staging:
+  stage: scan
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --redact
+  allow_failure: false
   only:
     - dev
 
