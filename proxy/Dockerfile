@@ -1,8 +1,8 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-web-obfuscation:latest AS builder
 
-COPY static /dulno/static
-COPY obfuscation /dulno/obfuscation
+COPY /static/js/ /dulno/static/js/
+COPY /obfuscation/ /dulno/obfuscation/
 
 ENV OBFUSCATION_HOME=/dulno
 
@@ -13,10 +13,10 @@ FROM ${DOCKER_REGISTRY}/dulno-web-proxy:latest
 ARG SERVER_NAME
 ENV SERVER_NAME=${SERVER_NAME}
 
-COPY --from=builder /dulno/static /dulno/static/
+COPY --from=builder /dulno/static/ /dulno/static/
 
-COPY proxy/nginx.conf /etc/nginx/nginx.conf
-COPY proxy/proxy /etc/nginx/sites-available/proxy
+COPY /proxy/nginx.conf /etc/nginx/nginx.conf
+COPY /proxy/proxy /etc/nginx/sites-available/proxy
 RUN mkdir -p /etc/nginx/sites-enabled
 RUN cp /etc/nginx/sites-available/proxy /etc/nginx/sites-enabled/proxy
 
