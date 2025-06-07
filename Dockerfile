@@ -1,5 +1,5 @@
 ARG DOCKER_REGISTRY
-FROM ${DOCKER_REGISTRY}/dulno-obfuscation:latest
+FROM ${DOCKER_REGISTRY}/dulno-web:latest
 
 RUN mkdir -p /dulno && cp -a /obfuscation /dulno/
 
