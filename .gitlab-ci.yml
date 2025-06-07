@@ -108,7 +108,7 @@ scan_secret_staging:
     name: zricethezav/gitleaks:latest
     entrypoint: [""]
   script:
-    - gitleaks detect --source . --redact
+    - gitleaks detect --source . --commit HEAD --redact --platform=gitlab
   allow_failure: false
   only:
     - dev
