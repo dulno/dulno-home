@@ -103,7 +103,7 @@ scan_container_staging:
   only:
     - dev
 
-scan_secret_staging:
+scan_secret:
   stage: scan
   image:
     name: zricethezav/gitleaks:latest
@@ -111,17 +111,13 @@ scan_secret_staging:
   script:
     - gitleaks detect --source . --redact --platform=gitlab --log-opts="-p -n 1"
   allow_failure: false
-  only:
-    - dev
 
-scan_code_staging:
+scan_code:
   stage: scan
   image: returntocorp/semgrep:latest
   script:
-    - semgrep --config=p/ci --metrics
+    - semgrep --config=p/ci
   allow_failure: false
-  only:
-    - dev
 
 scan_production:
   stage: scan
