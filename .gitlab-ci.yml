@@ -1,4 +1,5 @@
 stages:
+  - test
   - build
   - scan
   - publish
@@ -97,6 +98,13 @@ scan_code:
   image: semgrep/semgrep:latest
   script:
     - semgrep --config=p/ci --error $CI_PROJECT_DIR
+  allow_failure: false
+
+scan_infrastructure:
+  stage: test
+  image: bridgecrew/checkov
+  script:
+    - checkov -d $CI_PROJECT_DIR
   allow_failure: false
 
 scan_container_staging:
