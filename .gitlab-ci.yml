@@ -70,7 +70,8 @@ scan_staging:
     name: aquasec/trivy:latest
     entrypoint: [""]
   variables:
-    GIT_STRATEGY: none
+    TRIVY_USERNAME: $STAGING_DOCKER_USERNAME
+    TRIVY_PASSWORD: $STAGING_DOCKER_PASSWORD
   script:
     - time trivy image --download-db-only --no-progress
     - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
