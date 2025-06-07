@@ -114,9 +114,9 @@ scan_secret:
 
 scan_code:
   stage: scan
-  image: returntocorp/semgrep:latest
+  image: semgrep/semgrep:latest
   script:
-    - semgrep --config=p/ci
+    - semgrep --config=p/ci --verbose
   allow_failure: false
 
 scan_production:
