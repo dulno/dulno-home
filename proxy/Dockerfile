@@ -1,8 +1,6 @@
 ARG DOCKER_REGISTRY
 FROM ${DOCKER_REGISTRY}/dulno-web-obfuscation:latest AS builder
 
-RUN mkdir -p /dulno && cp -a /obfuscation /dulno/
-
 COPY static /dulno/static
 COPY obfuscation /dulno/obfuscation
 
