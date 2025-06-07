@@ -73,9 +73,13 @@ scan_staging:
     TRIVY_USERNAME: $STAGING_DOCKER_USERNAME
     TRIVY_PASSWORD: $STAGING_DOCKER_PASSWORD
   script:
-    - time trivy image --download-db-only --no-progress
-    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
-    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
+    - trivy image --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+  cache:
+    key: trivy-cache
+    paths:
+      - .trivycache/
   only:
     - dev
 
@@ -157,7 +161,7 @@ publish_production:
   only:
     - main
 
-deploy_staging:
+deploy_base_staging:
   stage: deploy
   image:
     name: bitnami/kubectl:latest
@@ -167,8 +171,20 @@ deploy_staging:
     - echo "$STAGING_KUBERNETES_CONFIGURATION" > ~/.kube/config
   script:
     - kubectl rollout restart $KUBERNETES_RESOURCE
-    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
     - kubectl rollout status $KUBERNETES_RESOURCE
+  only:
+    - dev
+
+deploy_proxy_staging:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  before_script:
+    - mkdir -p ~/.kube
+    - echo "$STAGING_KUBERNETES_CONFIGURATION" > ~/.kube/config
+  script:
+    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
     - kubectl rollout status $KUBERNETES_PROXY_RESOURCE
   only:
     - dev
