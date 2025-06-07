@@ -27,11 +27,10 @@ build_base_staging:
         --destination "$DOCKER_IMAGE:test" \
         --tarPath "$DOCKER_IMAGE.tar" \
         --no-push
-  cache:
-    key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
+  artifacts:
     paths:
       - $DOCKER_IMAGE.tar
-    policy: push
+    expire_in: 1h
   only:
     - dev
 
@@ -52,11 +51,10 @@ build_proxy_staging:
         --destination "$DOCKER_PROXY_IMAGE:test" \
         --tarPath "$DOCKER_PROXY_IMAGE.tar" \
         --no-push
-  cache:
-    key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
+  artifacts:
     paths:
       - $DOCKER_PROXY_IMAGE.tar
-    policy: push
+    expire_in: 1h
   only:
     - dev
 
@@ -83,24 +81,17 @@ scan_staging:
   image:
     name: aquasec/trivy:latest
     entrypoint: [""]
-  dependencies:
-    - build_base_staging
-    - build_proxy_staging
+  needs:
+    - job: build_base_staging
+      artifacts: true
+    - job: build_proxy_staging
+      artifacts: true
   variables:
     GIT_STRATEGY: none
   script:
     - time trivy image --download-db-only --no-progress
     - trivy image --input "$DOCKER_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
     - trivy image --input "$DOCKER_PROXY_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
-  cache:
-    - key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
-      paths:
-        - $DOCKER_IMAGE.tar
-      policy: pull
-    - key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
-      paths:
-        - $DOCKER_PROXY_IMAGE.tar
-      policy: pull
   only:
     - dev
 
@@ -135,8 +126,9 @@ publish_base_staging:
   image:
     name: quay.io/skopeo/stable:latest
     entrypoint: [""]
-  dependencies:
-    - build_base_staging
+  needs:
+    - job: build_base_staging
+      artifacts: true
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
@@ -144,11 +136,6 @@ publish_base_staging:
       skopeo copy \
         docker-archive:${DOCKER_IMAGE}.tar \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
-  cache:
-    - key: "build_base_staging-${CI_COMMIT_REF_SLUG}"
-      paths:
-        - $DOCKER_IMAGE.tar
-      policy: pull
   only:
     - dev
 
@@ -157,8 +144,9 @@ publish_proxy_staging:
   image:
     name: quay.io/skopeo/stable:latest
     entrypoint: [""]
-  dependencies:
-    - build_proxy_staging
+  needs:
+    - job: build_proxy_staging
+      artifacts: true
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
@@ -166,11 +154,6 @@ publish_proxy_staging:
       skopeo copy \
         docker-archive:${DOCKER_PROXY_IMAGE}.tar \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest
-  cache:
-    - key: "build_proxy_staging-${CI_COMMIT_REF_SLUG}"
-      paths:
-        - $DOCKER_PROXY_IMAGE.tar
-      policy: pull
   only:
     - dev
 
