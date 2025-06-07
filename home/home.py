@@ -34,16 +34,19 @@ async def app(request):
 async def imprint(request):
   return render(request, 'imprint.html', {'title': gettext("imprint.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/imprint.css']})
+      'css/base/home-footer.css', 'css/home/imprint.css'],
+    'isNavbarStatic': False})
 
 @home_page
 async def privacyPolicy(request):
   return render(request, 'privacy-policy.html', {'title': gettext("privacy.policy.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/privacy-policy.css']})
+      'css/base/home-footer.css', 'css/home/privacy-policy.css'],
+    'isNavbarStatic': False})
 
 @home_page
 async def termsOfService(request):
   return render(request, 'terms-of-service.html', {'title': gettext("terms.of.service.title"),
     'css': ['css/base/home-header.css', 'css/base/home-language.css',
-      'css/base/home-footer.css', 'css/home/terms-of-service.css']})
+      'css/base/home-footer.css', 'css/home/terms-of-service.css'],
+    'isNavbarStatic': False})
