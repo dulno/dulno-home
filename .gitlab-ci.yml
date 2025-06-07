@@ -116,7 +116,7 @@ scan_code:
   stage: scan
   image: semgrep/semgrep:latest
   script:
-    - semgrep --config=p/ci $CI_PROJECT_DIR
+    - semgrep --config=p/ci --error $CI_PROJECT_DIR
   allow_failure: false
 
 scan_production:
