@@ -117,7 +117,9 @@ scan_code:
   stage: test
   image: semgrep/semgrep:latest
   script:
-    - semgrep --config=p/ci --json > semgrep-report.json || echo "Semgrep found issues"
+    - echo "Scanning in $CI_PROJECT_DIR"
+    - find $CI_PROJECT_DIR -type f
+    - semgrep --config=p/ci --json $CI_PROJECT_DIR > semgrep-report.json || echo "Semgrep found issues"
     - cat semgrep-report.json
   artifacts:
     paths:
