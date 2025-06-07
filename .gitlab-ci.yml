@@ -117,7 +117,7 @@ scan_dependency:
     name: owasp/dependency-check
     entrypoint: [""]
   script:
-    - dependency-check.sh --scan $CI_PROJECT_DIR --format "ALL"
+    - dependency-check --scan $CI_PROJECT_DIR --format ALL
   allow_failure: false
 
 scan_container_staging:
