@@ -95,9 +95,7 @@ scan_secret:
 
 scan_code:
   stage: scan
-  image:
-    name: semgrep/semgrep:latest
-    entrypoint: [""]
+  image: semgrep/semgrep:latest
   script:
     - semgrep --config=p/ci --error $CI_PROJECT_DIR
   allow_failure: false
@@ -113,11 +111,9 @@ scan_infrastructure:
 
 scan_dependency:
   stage: test
-  image:
-    name: owasp/dependency-check
-    entrypoint: [""]
+  image: owasp/dependency-check
   script:
-    - dependency-check --scan $CI_PROJECT_DIR --format ALL
+    - dependency-check.sh --scan "$CI_PROJECT_DIR" --format ALL
   allow_failure: false
 
 scan_container_staging:
