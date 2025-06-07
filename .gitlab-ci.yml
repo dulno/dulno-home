@@ -102,7 +102,9 @@ scan_code:
 
 scan_infrastructure:
   stage: test
-  image: bridgecrew/checkov
+  image:
+    name: bridgecrew/checkov
+    entrypoint: [""]
   script:
     - checkov -d $CI_PROJECT_DIR
   allow_failure: false
