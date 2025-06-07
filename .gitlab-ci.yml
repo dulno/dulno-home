@@ -24,13 +24,7 @@ build_base_staging:
         --context "$CI_PROJECT_DIR" \
         --dockerfile "$CI_PROJECT_DIR/Dockerfile" \
         --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
-        --destination "$DOCKER_IMAGE:test" \
-        --tarPath "$DOCKER_IMAGE.tar" \
-        --no-push
-  artifacts:
-    paths:
-      - $DOCKER_IMAGE.tar
-    expire_in: 1h
+        --destination "$STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test"
   only:
     - dev
 
@@ -48,13 +42,7 @@ build_proxy_staging:
         --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
         --build-arg DOCKER_REGISTRY="$STAGING_DOCKER_REGISTRY" \
         --build-arg SERVER_NAME="10.96.0.15" \
-        --destination "$DOCKER_PROXY_IMAGE:test" \
-        --tarPath "$DOCKER_PROXY_IMAGE.tar" \
-        --no-push
-  artifacts:
-    paths:
-      - $DOCKER_PROXY_IMAGE.tar
-    expire_in: 1h
+        --destination "$STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" \
   only:
     - dev
 
@@ -81,17 +69,12 @@ scan_staging:
   image:
     name: aquasec/trivy:latest
     entrypoint: [""]
-  needs:
-    - job: build_base_staging
-      artifacts: true
-    - job: build_proxy_staging
-      artifacts: true
   variables:
     GIT_STRATEGY: none
   script:
     - time trivy image --download-db-only --no-progress
-    - trivy image --input "$DOCKER_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
-    - trivy image --input "$DOCKER_PROXY_IMAGE.tar" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
+    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
+    - trivy image "$STAGING_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1
   only:
     - dev
 
@@ -126,15 +109,12 @@ publish_base_staging:
   image:
     name: quay.io/skopeo/stable:latest
     entrypoint: [""]
-  needs:
-    - job: build_base_staging
-      artifacts: true
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
     - |
       skopeo copy \
-        docker-archive:${DOCKER_IMAGE}.tar \
+        docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:test \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
   only:
     - dev
@@ -144,15 +124,12 @@ publish_proxy_staging:
   image:
     name: quay.io/skopeo/stable:latest
     entrypoint: [""]
-  needs:
-    - job: build_proxy_staging
-      artifacts: true
   before_script:
     - skopeo login --username "$STAGING_DOCKER_USERNAME" --password "$STAGING_DOCKER_PASSWORD" $STAGING_DOCKER_REGISTRY
   script:
     - |
       skopeo copy \
-        docker-archive:${DOCKER_PROXY_IMAGE}.tar \
+        docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:test \
         docker://${STAGING_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest
   only:
     - dev
