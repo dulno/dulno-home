@@ -1,5 +1,4 @@
 stages:
-  - test
   - build
   - scan
   - publish
@@ -114,7 +113,7 @@ scan_secret:
   allow_failure: false
 
 scan_code:
-  stage: test
+  stage: scan
   image: semgrep/semgrep:latest
   script:
     - semgrep --config=p/ci $CI_PROJECT_DIR
