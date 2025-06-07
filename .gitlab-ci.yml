@@ -11,8 +11,6 @@ variables:
   KUBERNETES_RESOURCE: "deployment/dulno-home-deployment"
   KUBERNETES_PROXY_RESOURCE: "deployment/dulno-home-proxy-deployment"
   FF_USE_FASTZIP: "true"
-  ARTIFACT_COMPRESSION_LEVEL: "fastest"
-  CACHE_COMPRESSION_LEVEL: "fastest"
 
 build_base_staging:
   stage: build
@@ -49,21 +47,38 @@ build_proxy_staging:
   only:
     - dev
 
-build_production:
+build_base_production:
   stage: build
-  image: docker:cli
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$PRODUCTION_DOCKER_REGISTRY\":{\"username\":\"$PRODUCTION_DOCKER_USERNAME\",\"password\":\"$PRODUCTION_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
   script:
-    - echo $PRODUCTION_DOCKER_PASSWORD | docker login -u $PRODUCTION_DOCKER_USERNAME --password-stdin $PRODUCTION_DOCKER_REGISTRY
-    - docker build --build-arg DOCKER_REGISTRY="$PRODUCTION_DOCKER_REGISTRY" -t $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test .
-    - docker push $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - docker buildx build --build-arg DOCKER_REGISTRY="$PRODUCTION_DOCKER_REGISTRY" --build-arg SERVER_NAME="dulno.com www.dulno.com" -t $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test -f proxy/Dockerfile .
-    - docker push $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - |
+      /kaniko/executor \
+        --context "$CI_PROJECT_DIR" \
+        --dockerfile "$CI_PROJECT_DIR/Dockerfile" \
+        --build-arg DOCKER_REGISTRY="$PRODUCTION_DOCKER_REGISTRY" \
+        --destination "$PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test"
+  only:
+    - main
+
+build_proxy_production:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    - echo "{\"auths\":{\"$PRODUCTION_DOCKER_REGISTRY\":{\"username\":\"$PRODUCTION_DOCKER_USERNAME\",\"password\":\"$PRODUCTION_DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  script:
+    - |
+      /kaniko/executor \
+        --context "$CI_PROJECT_DIR" \
+        --dockerfile "$CI_PROJECT_DIR/proxy/Dockerfile" \
+        --build-arg DOCKER_REGISTRY="$PRODUCTION_DOCKER_REGISTRY" \
+        --build-arg SERVER_NAME="dulno.com www.dulno.com" \
+        --destination "$PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" \
   only:
     - main
 
@@ -91,22 +106,15 @@ scan_production:
   image:
     name: aquasec/trivy:latest
     entrypoint: [""]
-  dependencies:
-    - build_production
   variables:
-    GIT_STRATEGY: none
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
     TRIVY_USERNAME: $PRODUCTION_DOCKER_USERNAME
     TRIVY_PASSWORD: $PRODUCTION_DOCKER_PASSWORD
   script:
-    - trivy --version
-    - time trivy clean --scan-cache
-    - time trivy image --download-db-only --no-progress --cache-dir .trivycache/
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - trivy image --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/ $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
+    - trivy image --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy image "$PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+    - trivy image "$PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
   cache:
+    key: trivy-cache
     paths:
       - .trivycache/
   only:
@@ -142,25 +150,33 @@ publish_proxy_staging:
   only:
     - dev
 
-publish_production:
+publish_base_production:
   stage: publish
-  image: docker:cli
-  services:
-    - docker:dind
-  dependencies:
-    - scan_production
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_TLS_CERTDIR: ""
-    DOCKER_DRIVER: overlay2
+  image:
+    name: quay.io/skopeo/stable:latest
+    entrypoint: [""]
+  before_script:
+    - skopeo login --username "$PRODUCTION_DOCKER_USERNAME" --password "$PRODUCTION_DOCKER_PASSWORD" $PRODUCTION_DOCKER_REGISTRY
   script:
-    - echo $PRODUCTION_DOCKER_PASSWORD | docker login -u $PRODUCTION_DOCKER_USERNAME --password-stdin $PRODUCTION_DOCKER_REGISTRY
-    - docker pull $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test
-    - docker tag $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:test $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
-    - docker push $PRODUCTION_DOCKER_REGISTRY/$DOCKER_IMAGE:latest
-    - docker pull $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test
-    - docker tag $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:test $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
-    - docker push $PRODUCTION_DOCKER_REGISTRY/$DOCKER_PROXY_IMAGE:latest
+    - |
+      skopeo copy \
+        docker://${PRODUCTION_DOCKER_REGISTRY}/${DOCKER_IMAGE}:test \
+        docker://${PRODUCTION_DOCKER_REGISTRY}/${DOCKER_IMAGE}:latest
+  only:
+    - main
+
+publish_proxy_production:
+  stage: publish
+  image:
+    name: quay.io/skopeo/stable:latest
+    entrypoint: [""]
+  before_script:
+    - skopeo login --username "$PRODUCTION_DOCKER_USERNAME" --password "$PRODUCTION_DOCKER_PASSWORD" $PRODUCTION_DOCKER_REGISTRY
+  script:
+    - |
+      skopeo copy \
+        docker://${PRODUCTION_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:test \
+        docker://${PRODUCTION_DOCKER_REGISTRY}/${DOCKER_PROXY_IMAGE}:latest
   only:
     - main
 
@@ -192,20 +208,30 @@ deploy_proxy_staging:
   only:
     - dev
 
-deploy_production:
+deploy_base_production:
   stage: deploy
   image:
     name: bitnami/kubectl:latest
     entrypoint: [""]
-  dependencies:
-    - publish_production
   before_script:
     - mkdir -p ~/.kube
     - echo "$PRODUCTION_KUBERNETES_CONFIGURATION" > ~/.kube/config
   script:
     - kubectl rollout restart $KUBERNETES_RESOURCE
-    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
     - kubectl rollout status $KUBERNETES_RESOURCE
+  only:
+    - main
+
+deploy_proxy_production:
+  stage: deploy
+  image:
+    name: bitnami/kubectl:latest
+    entrypoint: [""]
+  before_script:
+    - mkdir -p ~/.kube
+    - echo "$PRODUCTION_KUBERNETES_CONFIGURATION" > ~/.kube/config
+  script:
+    - kubectl rollout restart $KUBERNETES_PROXY_RESOURCE
     - kubectl rollout status $KUBERNETES_PROXY_RESOURCE
   only:
     - main
