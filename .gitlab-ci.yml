@@ -10,7 +10,8 @@ variables:
   DOCKER_PROXY_IMAGE: "dulno-home-proxy"
   KUBERNETES_RESOURCE: "deployment/dulno-home-deployment"
   KUBERNETES_PROXY_RESOURCE: "deployment/dulno-home-proxy-deployment"
-  PROXY_SERVER_NAME: "10.96.0.15"
+  STAGING_PROXY_SERVER_NAME: "10.96.0.15"
+  PRODUCTION_PROXY_SERVER_NAME: "dulno.com www.dulno.com"
 
 include:
   - project: 'dulno/dulno-template'
