@@ -22,6 +22,7 @@ RUN mkdir -p /etc/nginx/sites-enabled
 
 COPY /proxy/nginx.conf /etc/nginx/nginx.conf
 COPY /proxy/proxy /etc/nginx/sites-enabled/proxy
+RUN chown 1000:1000 /etc/nginx/sites-enabled/proxy
 
 USER 1000
 
