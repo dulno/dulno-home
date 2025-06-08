@@ -21,10 +21,8 @@ COPY --from=builder /dulno/static/js/ /dulno/static/js/
 COPY /proxy/nginx.conf /etc/nginx/nginx.conf
 COPY /proxy/proxy /etc/nginx/sites-enabled/proxy
 
-RUN mkdir -p /etc/nginx/sites-enabled /var/cache/nginx/client_temp /run \
-    && touch /run/nginx.pid \
-    && chown -R 1000:1000 /etc/nginx/sites-enabled /var/cache/nginx /run
+RUN chown -R nginx:nginx /etc/nginx/sites-enabled
 
-USER 1000
+USER nginx
 
 CMD ["/bin/sh", "-c", "envsubst '$SERVER_NAME' < /etc/nginx/sites-enabled/proxy > /tmp/proxy && mv /tmp/proxy /etc/nginx/sites-enabled/proxy && exec nginx -g 'daemon off;'"]
