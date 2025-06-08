@@ -21,7 +21,8 @@ COPY --from=builder /dulno/static/js/ /dulno/static/js/
 COPY /proxy/nginx.conf /etc/nginx/nginx.conf
 COPY /proxy/proxy /etc/nginx/sites-enabled/proxy
 
-RUN chown -R nginx:nginx /etc/nginx/sites-enabled
+RUN mkdir -p /var/cache/nginx/client_temp \
+    && chown -R nginx:nginx /etc/nginx/sites-enabled /var/cache/nginx
 
 USER nginx
 
