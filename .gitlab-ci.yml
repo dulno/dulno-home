@@ -99,6 +99,29 @@ scan_code:
     - semgrep --config=p/ci --error $CI_PROJECT_DIR
   allow_failure: false
 
+scan_infrastructure:
+  stage: scan
+  image:
+    name: bridgecrew/checkov
+    entrypoint: [""]
+  script:
+    - checkov -d $CI_PROJECT_DIR
+  allow_failure: false
+
+scan_dependency:
+  stage: scan
+  image:
+    name: aquasec/trivy:latest
+    entrypoint: [""]
+  script:
+    - trivy fs --download-db-only --no-progress --cache-dir .trivycache/
+    - trivy fs "$CI_PROJECT_DIR" --ignore-unfixed --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --cache-dir .trivycache/
+  cache:
+    key: trivy-cache
+    paths:
+      - .trivycache/
+  allow_failure: false
+
 scan_container_staging:
   stage: scan
   image:
