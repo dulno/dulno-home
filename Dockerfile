@@ -23,6 +23,9 @@ COPY --from=builder /dulno/base/ /dulno/base/
 
 WORKDIR /dulno
 
+RUN python -m pip install --upgrade pip && \
+    pip install --upgrade "Django>=5.2.7,<5.3"
+
 RUN django-admin compilemessages
 
 USER 1000
