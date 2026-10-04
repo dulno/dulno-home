@@ -12,7 +12,6 @@ This project implements the homepage of Dulno. This includes general information
 |      | Pipeline status                                                       |
 |------|-----------------------------------------------------------------------|
 | main | ![](https://github.com/dulno/dulno-home/actions/workflows/ci.yml/badge.svg?branch=main)  |
-| dev  | ![](https://github.com/dulno/dulno-home/actions/workflows/ci.yml/badge.svg?branch=dev)   |
 
 ## Installation
 
