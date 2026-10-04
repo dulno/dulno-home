@@ -23,8 +23,9 @@ COPY --from=builder /dulno/base/ /dulno/base/
 
 WORKDIR /dulno
 
+COPY requirements.txt /dulno/requirements.txt
 RUN python -m pip install --upgrade pip && \
-    pip install --upgrade "Django>=5.2.7,<5.3"
+    pip install --upgrade -r requirements.txt
 
 RUN django-admin compilemessages
 

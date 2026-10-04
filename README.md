@@ -11,8 +11,8 @@ This project implements the homepage of Dulno. This includes general information
 
 |      | Pipeline status                                                       |
 |------|-----------------------------------------------------------------------|
-| main | ![](https://git.dulno.com/dulno/dulno-home/badges/main/pipeline.svg)  |
-| dev  | ![](https://git.dulno.com/dulno/dulno-home/badges/dev/pipeline.svg)   |
+| main | ![](https://github.com/dulno/dulno-home/actions/workflows/ci.yml/badge.svg?branch=main)  |
+| dev  | ![](https://github.com/dulno/dulno-home/actions/workflows/ci.yml/badge.svg?branch=dev)   |
 
 ## Installation
 
@@ -21,7 +21,7 @@ python -m venv env
 
 source env/bin/activate
 
-pip install django gunicorn django-cors-headers requests jwt
+pip install gunicorn -r requirements.txt
 
 django-admin compilemessages
 
@@ -41,3 +41,7 @@ gunicorn --config app/gunicorn-config.py app.wsgi
 ```bash
 django-admin compilemessages
 ```
+
+## License
+
+© Dulno. Licensed under [CC BY-NC-SA 4.0](LICENSE): free for non-commercial use with attribution to Dulno, modifications must be shared under the same license. Third-party code (e.g. under `static/dependency/`) keeps its own license.
